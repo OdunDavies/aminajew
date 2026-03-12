@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useQuery } from "@tanstack/react-query";
 import ProductCard from "@/components/ProductCard";
-import { getNewArrivals, getBestSellers } from "@/data/products";
+import { fetchNewArrivals, fetchBestSellers } from "@/data/products";
 import { ArrowRight } from "lucide-react";
 
 const collections = [
@@ -12,8 +13,8 @@ const collections = [
 ];
 
 const Index = () => {
-  const newArrivals = getNewArrivals();
-  const bestSellers = getBestSellers();
+  const { data: newArrivals = [] } = useQuery({ queryKey: ["new-arrivals"], queryFn: fetchNewArrivals });
+  const { data: bestSellers = [] } = useQuery({ queryKey: ["best-sellers"], queryFn: fetchBestSellers });
 
   return (
     <div className="min-h-screen">

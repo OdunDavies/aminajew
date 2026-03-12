@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
-import { products, getProductsByCategory } from "@/data/products";
+import { useQuery } from "@tanstack/react-query";
+import { fetchProducts, fetchProductsByCategory } from "@/data/products";
 import ProductCard from "@/components/ProductCard";
 
 const categoryTitles: Record<string, string> = {
@@ -11,8 +12,12 @@ const categoryTitles: Record<string, string> = {
 
 const Collections = () => {
   const { category } = useParams();
-  const filtered = category ? getProductsByCategory(category) : products;
   const title = category ? categoryTitles[category] || "Collection" : "All Collections";
+
+  const { data: products, isLoading } = useQuery({
+    queryKey: ["products", category || "all"],
+    queryFn: () => category ? fetchProductsByCategory(category) : fetchProducts(),
+  });
 
   return (
     <div className="min-h-screen pt-24 pb-16 px-6">
@@ -22,13 +27,17 @@ const Collections = () => {
           <h1 className="font-serif text-3xl md:text-5xl text-foreground">{title}</h1>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {filtered.map((p) => (
-            <ProductCard key={p.id} product={p} />
-          ))}
-        </div>
+        {isLoading ? (
+          <p className="text-center text-muted-foreground py-20">Loading...</p>
+        ) : (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {(products || []).map((p) => (
+              <ProductCard key={p.id} product={p} />
+            ))}
+          </div>
+        )}
 
-        {filtered.length === 0 && (
+        {!isLoading && (!products || products.length === 0) && (
           <p className="text-center text-muted-foreground py-20">No products found.</p>
         )}
       </div>
