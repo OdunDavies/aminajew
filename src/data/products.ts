@@ -38,7 +38,7 @@ export async function fetchProducts(): Promise<Product[]> {
 }
 
 export async function fetchProductsByCategory(category: string): Promise<Product[]> {
-  const { data, error } = await supabase.from("products").select("*").eq("category", category).order("created_at");
+  const { data, error } = await supabase.from("products").select("*").eq("category", category as "rings" | "necklaces" | "bracelets" | "earrings").order("created_at");
   if (error) throw error;
   return (data || []).map(mapRow);
 }
