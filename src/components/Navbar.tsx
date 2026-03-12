@@ -1,0 +1,101 @@
+import { Link } from "react-router-dom";
+import { ShoppingBag, Menu, X, Search } from "lucide-react";
+import { useCart } from "@/context/CartContext";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+
+const navLinks = [
+  { label: "Collections", href: "/collections" },
+  { label: "Rings", href: "/collections/rings" },
+  { label: "Necklaces", href: "/collections/necklaces" },
+  { label: "Bracelets", href: "/collections/bracelets" },
+  { label: "Earrings", href: "/collections/earrings" },
+  { label: "About", href: "/about" },
+  { label: "Contact", href: "/contact" },
+];
+
+const Navbar = () => {
+  const { totalItems, setIsOpen } = useCart();
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  return (
+    <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
+      <div className="container mx-auto px-4 sm:px-6">
+        <div className="flex items-center justify-between h-16 md:h-20">
+          {/* Mobile menu toggle */}
+          <button
+            className="md:hidden text-foreground"
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label="Toggle menu"
+          >
+            {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+
+          {/* Logo */}
+          <Link to="/" className="font-serif text-xl md:text-2xl tracking-[0.2em] text-primary">
+            AURUM
+          </Link>
+
+          {/* Desktop nav */}
+          <nav className="hidden md:flex items-center gap-8">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                to={link.href}
+                className="text-xs tracking-[0.15em] uppercase text-muted-foreground hover:text-primary transition-colors"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+
+          {/* Actions */}
+          <div className="flex items-center gap-4">
+            <Link to="/collections" className="text-muted-foreground hover:text-primary transition-colors">
+              <Search size={20} />
+            </Link>
+            <button
+              onClick={() => setIsOpen(true)}
+              className="relative text-muted-foreground hover:text-primary transition-colors"
+              aria-label="Open cart"
+            >
+              <ShoppingBag size={20} />
+              {totalItems > 0 && (
+                <span className="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-primary text-primary-foreground text-xs flex items-center justify-center font-sans">
+                  {totalItems}
+                </span>
+              )}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile nav */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            className="md:hidden overflow-hidden bg-background border-b border-border"
+          >
+            <nav className="flex flex-col px-6 py-4 gap-4">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  to={link.href}
+                  className="text-sm tracking-[0.1em] uppercase text-muted-foreground hover:text-primary transition-colors"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </header>
+  );
+};
+
+export default Navbar;
