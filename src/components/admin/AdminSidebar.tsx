@@ -15,14 +15,25 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 
+import { Package, LogOut } from "lucide-react";
+import { NavLink } from "@/components/NavLink";
+import { useLocation, useNavigate } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarGroupLabel,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  SidebarFooter,
+  useSidebar,
+} from "@/components/ui/sidebar";
+
 const items = [
-  { title: "Dashboard", url: "/admin", icon: LayoutDashboard },
-  { title: "Products", url: "/admin/products", icon: Package },
-  { title: "Customers", url: "/admin/customers", icon: Users },
-  { title: "Leads", url: "/admin/leads", icon: Target },
-  { title: "Orders", url: "/admin/orders", icon: ShoppingCart },
-  { title: "Contacts", url: "/admin/contacts", icon: Mail },
-  { title: "Analytics", url: "/admin/analytics", icon: BarChart3 },
+  { title: "Products", url: "/admin", icon: Package },
 ];
 
 export function AdminSidebar() {

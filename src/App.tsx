@@ -32,13 +32,7 @@ const App = () => (
             {/* Admin routes - no store navbar/footer */}
             <Route path="/admin/login" element={<AdminLogin />} />
             <Route path="/admin" element={<AdminLayout />}>
-              <Route index element={<Dashboard />} />
-              <Route path="products" element={<Products />} />
-              <Route path="customers" element={<Customers />} />
-              <Route path="leads" element={<Leads />} />
-              <Route path="orders" element={<Orders />} />
-              <Route path="contacts" element={<Contacts />} />
-              <Route path="analytics" element={<Analytics />} />
+              <Route index element={<Products />} />
             </Route>
 
             {/* Storefront routes */}
