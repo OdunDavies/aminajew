@@ -1,6 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { fetchProductById, fetchProductsByCategory, Product } from "@/data/products";
+import { fetchProductById, fetchProductsByCollection, Product } from "@/data/products";
 import { useCart } from "@/context/CartContext";
 import { useState } from "react";
 import { motion } from "framer-motion";
@@ -20,10 +20,10 @@ const ProductDetail = () => {
   });
 
   const { data: related = [] } = useQuery({
-    queryKey: ["related-products", product?.category],
+    queryKey: ["related-products", product?.collection],
     queryFn: async () => {
       if (!product) return [];
-      const all = await fetchProductsByCategory(product.category);
+      const all = await fetchProductsByCollection(product.collection);
       return all.filter((p) => p.id !== product.id).slice(0, 4);
     },
     enabled: !!product,
@@ -49,7 +49,7 @@ const ProductDetail = () => {
         <div className="flex items-center gap-2 text-xs text-muted-foreground mb-8">
           <Link to="/" className="hover:text-primary">Home</Link>
           <span>/</span>
-          <Link to={`/collections/${product.category}`} className="hover:text-primary capitalize">{product.category}</Link>
+          <Link to={`/collections/${product.collection}`} className="hover:text-primary capitalize">{product.collection}</Link>
           <span>/</span>
           <span className="text-foreground">{product.name}</span>
         </div>
