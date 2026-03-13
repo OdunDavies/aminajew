@@ -47,9 +47,9 @@ const CollectionCards = () => (
 );
 
 const Collections = () => {
-  const { category } = useParams();
-  const title = category
-    ? collections.find((c) => c.slug === category)?.label || "Collection"
+  const { collection } = useParams();
+  const title = collection
+    ? collections.find((c) => c.slug === collection)?.label || "Collection"
     : "Our Collections";
 
   const { data: products, isLoading } = useQuery({
