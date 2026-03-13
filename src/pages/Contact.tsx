@@ -27,6 +27,10 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen pt-24 pb-16 px-6">
+      <SEO
+        title="Contact Us"
+        description="Get in touch with artsybrands. Reach out for inquiries about our handcrafted jewelry, custom orders, or customer support."
+      />
       <div className="container mx-auto max-w-4xl">
         <div className="text-center mb-16">
           <p className="text-xs tracking-[0.3em] uppercase text-primary mb-3">Get in Touch</p>
