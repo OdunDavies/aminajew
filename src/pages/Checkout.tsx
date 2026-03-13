@@ -52,7 +52,7 @@ const Checkout = () => {
                   <Label htmlFor="email" className="text-xs tracking-wider uppercase">Email</Label>
                   <Input id="email" type="email" className="bg-background" />
                 </div>
-                <div className="col-span-2 space-y-2">
+                <div className="sm:col-span-2 space-y-2">
                   <Label htmlFor="address" className="text-xs tracking-wider uppercase">Address</Label>
                   <Input id="address" className="bg-background" />
                 </div>
