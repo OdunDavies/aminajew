@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { fetchProducts, fetchProductsByCollection } from "@/data/products";
 import ProductCard from "@/components/ProductCard";
 import { motion } from "framer-motion";
+import SEO from "@/components/SEO";
 
 import ringsImg from "@/assets/collection-rings.jpg";
 import necklacesImg from "@/assets/collection-necklaces.jpg";
