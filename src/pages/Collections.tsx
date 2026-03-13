@@ -68,7 +68,7 @@ const Collections = () => {
           <h1 className="font-serif text-3xl md:text-5xl text-foreground">{title}</h1>
         </div>
 
-        {!category ? (
+        {!collection ? (
           <CollectionCards />
         ) : isLoading ? (
           <p className="text-center text-muted-foreground py-20">Loading...</p>
