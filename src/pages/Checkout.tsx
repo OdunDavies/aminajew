@@ -39,7 +39,7 @@ const Checkout = () => {
           <div className="md:col-span-3 space-y-8">
             <div>
               <h2 className="font-serif text-lg text-foreground mb-4">Delivery Address</h2>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="firstName" className="text-xs tracking-wider uppercase">First Name</Label>
                   <Input id="firstName" className="bg-background" />
@@ -48,7 +48,7 @@ const Checkout = () => {
                   <Label htmlFor="lastName" className="text-xs tracking-wider uppercase">Last Name</Label>
                   <Input id="lastName" className="bg-background" />
                 </div>
-                <div className="col-span-2 space-y-2">
+                <div className="sm:col-span-2 space-y-2">
                   <Label htmlFor="email" className="text-xs tracking-wider uppercase">Email</Label>
                   <Input id="email" type="email" className="bg-background" />
                 </div>
