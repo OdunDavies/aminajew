@@ -15,7 +15,7 @@ const About = () => (
     <div className="container mx-auto px-6 py-20">
       <div className="max-w-3xl mx-auto space-y-8">
         <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-muted-foreground leading-relaxed text-lg">
-          Founded on the belief that jewelry is more than adornment — it's a language of love, a marker of milestones, and an expression of identity. At AURUM, we marry centuries-old goldsmithing traditions with contemporary design sensibility.
+          Founded on the belief that jewelry is more than adornment — it's a language of love, a marker of milestones, and an expression of identity. At artsybrands, we marry centuries-old goldsmithing traditions with contemporary design sensibility.
         </motion.p>
         <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="text-muted-foreground leading-relaxed">
           Every gemstone is ethically sourced. Every setting is hand-finished. Every piece undergoes rigorous quality inspection before earning the AURUM hallmark. We work with master artisans who bring decades of expertise to each creation.
