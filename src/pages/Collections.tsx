@@ -47,15 +47,15 @@ const CollectionCards = () => (
 );
 
 const Collections = () => {
-  const { category } = useParams();
-  const title = category
-    ? collections.find((c) => c.slug === category)?.label || "Collection"
+  const { collection } = useParams();
+  const title = collection
+    ? collections.find((c) => c.slug === collection)?.label || "Collection"
     : "Our Collections";
 
   const { data: products, isLoading } = useQuery({
-    queryKey: ["products", category || "all"],
-    queryFn: () => (category ? fetchProductsByCollection(category) : fetchProducts()),
-    enabled: !!category,
+    queryKey: ["products", collection || "all"],
+    queryFn: () => (collection ? fetchProductsByCollection(collection) : fetchProducts()),
+    enabled: !!collection,
   });
 
   return (
@@ -63,12 +63,12 @@ const Collections = () => {
       <div className="container mx-auto">
         <div className="text-center mb-12">
           <p className="text-xs tracking-[0.3em] uppercase text-primary mb-3">
-            {category ? "Collection" : "Browse"}
+            {collection ? "Collection" : "Browse"}
           </p>
           <h1 className="font-serif text-3xl md:text-5xl text-foreground">{title}</h1>
         </div>
 
-        {!category ? (
+        {!collection ? (
           <CollectionCards />
         ) : isLoading ? (
           <p className="text-center text-muted-foreground py-20">Loading...</p>
