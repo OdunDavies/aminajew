@@ -19,6 +19,17 @@ const Index = () => {
 
   return (
     <div className="min-h-screen">
+      <SEO
+        title="artsybrands — Exquisite Handcrafted Jewelry"
+        description="Discover handcrafted jewelry pieces forged with passion and the finest materials. Shop rings, necklaces, bracelets, and earrings at artsybrands."
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: "artsybrands",
+          url: window.location.origin,
+          description: "Exquisite handcrafted jewelry — rings, necklaces, bracelets, and earrings.",
+        }}
+      />
       {/* Hero */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div

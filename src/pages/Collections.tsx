@@ -61,6 +61,10 @@ const Collections = () => {
 
   return (
     <div className="min-h-screen pt-24 pb-16 px-6">
+      <SEO
+        title={collection ? `${title} Collection` : "Collections"}
+        description={collection ? `Shop our ${title} collection — handcrafted luxury ${title.toLowerCase()} at artsybrands.` : "Browse artsybrands jewelry collections — rings, necklaces, bracelets, and earrings."}
+      />
       <div className="container mx-auto">
         <div className="text-center mb-12">
           <p className="text-xs tracking-[0.3em] uppercase text-primary mb-3">

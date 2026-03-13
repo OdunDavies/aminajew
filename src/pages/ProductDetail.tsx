@@ -1,6 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { fetchProductById, fetchProductsByCollection, Product } from "@/data/products";
+import SEO from "@/components/SEO";
 import { useCart } from "@/context/CartContext";
 import { useState } from "react";
 import { motion } from "framer-motion";
