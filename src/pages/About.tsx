@@ -30,7 +30,7 @@ const About = () => (
         </motion.p>
       </div>
 
-      <div className="grid grid-cols-3 gap-8 mt-20 text-center">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mt-20 text-center">
         {[
           { num: "500+", label: "Unique Designs" },
           { num: "15", label: "Years of Craft" },

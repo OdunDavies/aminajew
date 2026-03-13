@@ -122,7 +122,7 @@ const ProductDetail = () => {
               <ShoppingBag size={16} /> Add to Cart
             </button>
 
-            <div className="grid grid-cols-3 gap-4 border-t border-border pt-8">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 border-t border-border pt-8">
               {[
                 { icon: Truck, label: "Free Shipping", desc: "On orders $500+" },
                 { icon: Shield, label: "Authenticity", desc: "Certified genuine" },
