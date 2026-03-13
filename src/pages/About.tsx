@@ -5,7 +5,7 @@ const About = () => (
   <div className="min-h-screen pt-24 pb-16">
     <SEO
       title="About Us"
-      description="Learn about artsybrands — our story, craftsmanship philosophy, and commitment to ethically sourced, handcrafted luxury jewelry."
+      description="Learn about artsybrands in Kuje, Abuja, FCT — our story, craftsmanship philosophy, and commitment to ethically sourced, handcrafted gold jewelry sold by the ounce."
     />
     {/* Hero */}
     <section className="relative h-[50vh] flex items-center justify-center overflow-hidden">

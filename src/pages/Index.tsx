@@ -20,14 +20,14 @@ const Index = () => {
   return (
     <div className="min-h-screen">
       <SEO
-        title="artsybrands — Exquisite Handcrafted Jewelry"
-        description="Discover handcrafted jewelry pieces forged with passion and the finest materials. Shop rings, necklaces, bracelets, and earrings at artsybrands."
+        title="artsybrands — Exquisite Handcrafted Gold Jewelry in Kuje, Abuja"
+        description="Discover handcrafted gold jewelry by the ounce in Kuje, Abuja, FCT. Shop rings, necklaces, bracelets, and earrings forged with passion and the finest materials at artsybrands."
         jsonLd={{
           "@context": "https://schema.org",
           "@type": "WebSite",
           name: "artsybrands",
           url: window.location.origin,
-          description: "Exquisite handcrafted jewelry — rings, necklaces, bracelets, and earrings.",
+          description: "Exquisite handcrafted gold jewelry by the ounce in Kuje, Abuja, FCT — rings, necklaces, bracelets, and earrings.",
         }}
       />
       {/* Hero */}
