@@ -8,7 +8,7 @@ const About = () => (
       <div className="absolute inset-0 bg-background/70" />
       <div className="relative text-center z-10">
         <p className="text-xs tracking-[0.3em] uppercase text-primary mb-3">Our Story</p>
-        <h1 className="font-serif text-4xl md:text-5xl text-foreground">About AURUM</h1>
+        <h1 className="font-serif text-4xl md:text-5xl text-foreground">About artsybrands</h1>
       </div>
     </section>
 
