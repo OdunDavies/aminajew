@@ -47,7 +47,7 @@ const Footer = () => (
       </div>
       <div className="border-t border-border mt-12 pt-8 text-center">
         <p className="text-xs text-muted-foreground tracking-wider">
-          © 2026 AURUM. All rights reserved. Crafted with love.
+          © 2026 artsybrands. All rights reserved. Crafted with love.
         </p>
       </div>
     </div>

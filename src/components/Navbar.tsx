@@ -29,7 +29,7 @@ const Navbar = () => {
 
           {/* Logo */}
           <Link to="/" className="font-serif text-xl md:text-2xl tracking-[0.2em] text-primary">
-            AURUM
+            artsybrands
           </Link>
 
           {/* Desktop nav */}
