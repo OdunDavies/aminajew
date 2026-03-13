@@ -53,9 +53,9 @@ const Collections = () => {
     : "Our Collections";
 
   const { data: products, isLoading } = useQuery({
-    queryKey: ["products", category || "all"],
-    queryFn: () => (category ? fetchProductsByCollection(category) : fetchProducts()),
-    enabled: !!category,
+    queryKey: ["products", collection || "all"],
+    queryFn: () => (collection ? fetchProductsByCollection(collection) : fetchProducts()),
+    enabled: !!collection,
   });
 
   return (
