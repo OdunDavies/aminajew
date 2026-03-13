@@ -64,7 +64,7 @@ const Checkout = () => {
                   <Label htmlFor="zip" className="text-xs tracking-wider uppercase">Zip Code</Label>
                   <Input id="zip" className="bg-background" />
                 </div>
-                <div className="col-span-2 space-y-2">
+                <div className="sm:col-span-2 space-y-2">
                   <Label htmlFor="country" className="text-xs tracking-wider uppercase">Country</Label>
                   <Input id="country" className="bg-background" />
                 </div>
