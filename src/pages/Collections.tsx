@@ -63,7 +63,7 @@ const Collections = () => {
       <div className="container mx-auto">
         <div className="text-center mb-12">
           <p className="text-xs tracking-[0.3em] uppercase text-primary mb-3">
-            {category ? "Collection" : "Browse"}
+            {collection ? "Collection" : "Browse"}
           </p>
           <h1 className="font-serif text-3xl md:text-5xl text-foreground">{title}</h1>
         </div>
