@@ -171,7 +171,7 @@ export type Database = {
       }
       products: {
         Row: {
-          category: Database["public"]["Enums"]["product_category"]
+          collection: Database["public"]["Enums"]["product_collection"]
           created_at: string
           description: string | null
           id: string
@@ -186,7 +186,7 @@ export type Database = {
           updated_at: string
         }
         Insert: {
-          category: Database["public"]["Enums"]["product_category"]
+          collection: Database["public"]["Enums"]["product_collection"]
           created_at?: string
           description?: string | null
           id?: string
@@ -201,7 +201,7 @@ export type Database = {
           updated_at?: string
         }
         Update: {
-          category?: Database["public"]["Enums"]["product_category"]
+          collection?: Database["public"]["Enums"]["product_collection"]
           created_at?: string
           description?: string | null
           id?: string
@@ -291,7 +291,7 @@ export type Database = {
         | "shipped"
         | "delivered"
         | "cancelled"
-      product_category: "rings" | "necklaces" | "bracelets" | "earrings"
+      product_collection: "rings" | "necklaces" | "bracelets" | "earrings"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -429,7 +429,7 @@ export const Constants = {
         "delivered",
         "cancelled",
       ],
-      product_category: ["rings", "necklaces", "bracelets", "earrings"],
+      product_collection: ["rings", "necklaces", "bracelets", "earrings"],
     },
   },
 } as const

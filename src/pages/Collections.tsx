@@ -1,9 +1,9 @@
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { fetchProducts, fetchProductsByCategory } from "@/data/products";
+import { fetchProducts, fetchProductsByCollection } from "@/data/products";
 import ProductCard from "@/components/ProductCard";
 
-const categoryTitles: Record<string, string> = {
+const collectionTitles: Record<string, string> = {
   rings: "Rings",
   necklaces: "Necklaces",
   bracelets: "Bracelets",
@@ -12,11 +12,11 @@ const categoryTitles: Record<string, string> = {
 
 const Collections = () => {
   const { category } = useParams();
-  const title = category ? categoryTitles[category] || "Collection" : "All Collections";
+  const title = category ? collectionTitles[category] || "Collection" : "All Collections";
 
   const { data: products, isLoading } = useQuery({
     queryKey: ["products", category || "all"],
-    queryFn: () => category ? fetchProductsByCategory(category) : fetchProducts(),
+    queryFn: () => category ? fetchProductsByCollection(category) : fetchProducts(),
   });
 
   return (

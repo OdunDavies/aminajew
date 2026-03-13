@@ -14,12 +14,12 @@ import { Plus, Pencil, Trash2 } from "lucide-react";
 import { useState } from "react";
 import { toast } from "@/hooks/use-toast";
 
-type ProductCategory = "rings" | "necklaces" | "bracelets" | "earrings";
+type ProductCollection = "rings" | "necklaces" | "bracelets" | "earrings";
 
 interface ProductForm {
   name: string;
   price: string;
-  category: ProductCategory;
+  collection: ProductCollection;
   material: string;
   description: string;
   image: string;
@@ -30,7 +30,7 @@ interface ProductForm {
 }
 
 const emptyForm: ProductForm = {
-  name: "", price: "", category: "rings", material: "", description: "",
+  name: "", price: "", collection: "rings", material: "", description: "",
   image: "", images: "", is_new: false, is_best_seller: false, sizes: "",
 };
 
@@ -54,7 +54,7 @@ const Products = () => {
       const payload = {
         name: form.name,
         price: parseFloat(form.price),
-        category: form.category as ProductCategory,
+        collection: form.collection as ProductCollection,
         material: form.material,
         description: form.description,
         image: form.image,
@@ -95,7 +95,7 @@ const Products = () => {
   const openEdit = (p: any) => {
     setEditId(p.id);
     setForm({
-      name: p.name, price: String(p.price), category: p.category,
+      name: p.name, price: String(p.price), collection: p.collection,
       material: p.material || "", description: p.description || "",
       image: p.image || "", images: (p.images || []).join("\n"),
       is_new: p.is_new || false, is_best_seller: p.is_best_seller || false,
@@ -129,8 +129,8 @@ const Products = () => {
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label>Category</Label>
-                  <Select value={form.category} onValueChange={(v) => setForm({ ...form, category: v as ProductCategory })}>
+                  <Label>Collection</Label>
+                  <Select value={form.collection} onValueChange={(v) => setForm({ ...form, collection: v as ProductCollection })}>
                     <SelectTrigger><SelectValue /></SelectTrigger>
                     <SelectContent>
                       {["rings", "necklaces", "bracelets", "earrings"].map((c) => (
@@ -187,7 +187,7 @@ const Products = () => {
               <TableRow>
                 <TableHead>Image</TableHead>
                 <TableHead>Name</TableHead>
-                <TableHead>Category</TableHead>
+                <TableHead>Collection</TableHead>
                 <TableHead>Price</TableHead>
                 <TableHead>Status</TableHead>
                 <TableHead className="text-right">Actions</TableHead>
@@ -200,7 +200,7 @@ const Products = () => {
                     <img src={p.image || ""} alt={p.name} className="w-10 h-10 object-cover rounded" />
                   </TableCell>
                   <TableCell className="font-medium">{p.name}</TableCell>
-                  <TableCell className="capitalize">{p.category}</TableCell>
+                  <TableCell className="capitalize">{p.collection}</TableCell>
                   <TableCell>${Number(p.price).toLocaleString()}</TableCell>
                   <TableCell className="space-x-1">
                     {p.is_new && <Badge variant="secondary" className="text-[10px]">New</Badge>}

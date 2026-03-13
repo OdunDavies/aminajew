@@ -4,7 +4,7 @@ export interface Product {
   id: string;
   name: string;
   price: number;
-  category: "rings" | "necklaces" | "bracelets" | "earrings";
+  collection: "rings" | "necklaces" | "bracelets" | "earrings";
   material: string;
   description: string;
   image: string;
@@ -20,7 +20,7 @@ function mapRow(row: any): Product {
     id: row.id,
     name: row.name,
     price: Number(row.price),
-    category: row.category,
+    collection: row.collection,
     material: row.material || "",
     description: row.description || "",
     image: row.image || "",
@@ -37,8 +37,8 @@ export async function fetchProducts(): Promise<Product[]> {
   return (data || []).map(mapRow);
 }
 
-export async function fetchProductsByCategory(category: string): Promise<Product[]> {
-  const { data, error } = await supabase.from("products").select("*").eq("category", category as "rings" | "necklaces" | "bracelets" | "earrings").order("created_at");
+export async function fetchProductsByCollection(collection: string): Promise<Product[]> {
+  const { data, error } = await supabase.from("products").select("*").eq("collection", collection as any).order("created_at");
   if (error) throw error;
   return (data || []).map(mapRow);
 }
