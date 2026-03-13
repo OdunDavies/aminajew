@@ -21,7 +21,7 @@ const Checkout = () => {
   if (items.length === 0) {
     return (
       <div className="min-h-screen pt-32 text-center px-6">
-        <SEO title="Checkout" description="Complete your artsybrands purchase securely. Free shipping on orders over $500." />
+        <SEO title="Checkout" description="Complete your artsybrands gold jewelry purchase securely from Kuje, Abuja, FCT. Free shipping on orders over $500." />
         <h1 className="font-serif text-2xl text-foreground mb-4">Your cart is empty</h1>
         <Link to="/collections" className="text-primary text-sm hover:underline">Continue shopping</Link>
       </div>
