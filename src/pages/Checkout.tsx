@@ -29,6 +29,7 @@ const Checkout = () => {
 
   return (
     <div className="min-h-screen pt-24 pb-16 px-6">
+      <SEO title="Checkout" description="Complete your artsybrands purchase securely. Free shipping on orders over $500." />
       <div className="container mx-auto max-w-4xl">
         <h1 className="font-serif text-3xl text-foreground text-center mb-12">Checkout</h1>
 
