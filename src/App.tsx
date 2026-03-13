@@ -17,13 +17,7 @@ import Contact from "./pages/Contact";
 import FAQ from "./pages/FAQ";
 import NotFound from "./pages/NotFound";
 import AdminLogin from "./pages/admin/AdminLogin";
-import Dashboard from "./pages/admin/Dashboard";
 import Products from "./pages/admin/Products";
-import Customers from "./pages/admin/Customers";
-import Leads from "./pages/admin/Leads";
-import Orders from "./pages/admin/Orders";
-import Contacts from "./pages/admin/Contacts";
-import Analytics from "./pages/admin/Analytics";
 
 const queryClient = new QueryClient();
 
