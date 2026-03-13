@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import ProductCard from "@/components/ProductCard";
 import { fetchNewArrivals, fetchBestSellers } from "@/data/products";
 import { ArrowRight } from "lucide-react";
+import SEO from "@/components/SEO";
 
 const collections = [
   { name: "Rings", slug: "rings", image: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=500&h=600&fit=crop" },
