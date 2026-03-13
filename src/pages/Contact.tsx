@@ -63,7 +63,7 @@ const Contact = () => {
             {[
               { icon: MapPin, title: "Address", text: "123 Luxury Lane\nNew York, NY 10001" },
               { icon: Phone, title: "Phone", text: "+1 (555) 123-4567" },
-              { icon: Mail, title: "Email", text: "hello@aurum.jewelry" },
+              { icon: Mail, title: "Email", text: "hello@artsybrands.com" },
             ].map(({ icon: Icon, title, text }) => (
               <div key={title} className="flex gap-4">
                 <Icon size={20} className="text-primary mt-1 shrink-0" />

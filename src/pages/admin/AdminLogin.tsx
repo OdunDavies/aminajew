@@ -40,7 +40,7 @@ const AdminLogin = () => {
     <div className="min-h-screen flex items-center justify-center bg-background px-4">
       <div className="w-full max-w-sm space-y-8">
         <div className="text-center">
-          <h1 className="font-serif text-3xl text-primary tracking-[0.2em]">AURUM</h1>
+          <h1 className="font-serif text-3xl text-primary tracking-[0.2em]">artsybrands</h1>
           <p className="text-muted-foreground text-sm mt-2">Admin Dashboard</p>
         </div>
         <form onSubmit={handleLogin} className="space-y-4">
