@@ -10,8 +10,8 @@ import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, 
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 import { Badge } from "@/components/ui/badge";
-import { Plus, Pencil, Trash2 } from "lucide-react";
-import { useState } from "react";
+import { Plus, Pencil, Trash2, Upload, X, ImageIcon } from "lucide-react";
+import { useState, useRef } from "react";
 import { toast } from "@/hooks/use-toast";
 
 type ProductCollection = "rings" | "necklaces" | "bracelets" | "earrings";
@@ -23,7 +23,7 @@ interface ProductForm {
   material: string;
   description: string;
   image: string;
-  images: string;
+  galleryImages: string[];
   is_new: boolean;
   is_best_seller: boolean;
   sizes: string;
@@ -31,14 +31,28 @@ interface ProductForm {
 
 const emptyForm: ProductForm = {
   name: "", price: "", collection: "rings", material: "", description: "",
-  image: "", images: "", is_new: false, is_best_seller: false, sizes: "",
+  image: "", galleryImages: [], is_new: false, is_best_seller: false, sizes: "",
 };
+
+const BUCKET = "product-images";
+
+async function uploadFile(file: File): Promise<string> {
+  const ext = file.name.split(".").pop();
+  const path = `${crypto.randomUUID()}.${ext}`;
+  const { error } = await supabase.storage.from(BUCKET).upload(path, file);
+  if (error) throw error;
+  const { data } = supabase.storage.from(BUCKET).getPublicUrl(path);
+  return data.publicUrl;
+}
 
 const Products = () => {
   const qc = useQueryClient();
   const [open, setOpen] = useState(false);
   const [editId, setEditId] = useState<string | null>(null);
   const [form, setForm] = useState<ProductForm>(emptyForm);
+  const [uploading, setUploading] = useState(false);
+  const mainImageRef = useRef<HTMLInputElement>(null);
+  const galleryRef = useRef<HTMLInputElement>(null);
 
   const { data: products, isLoading } = useQuery({
     queryKey: ["admin-products"],
@@ -58,7 +72,7 @@ const Products = () => {
         material: form.material,
         description: form.description,
         image: form.image,
-        images: form.images.split("\n").map((s) => s.trim()).filter(Boolean),
+        images: form.galleryImages,
         is_new: form.is_new,
         is_best_seller: form.is_best_seller,
         sizes: form.sizes.split(",").map((s) => s.trim()).filter(Boolean),
@@ -92,12 +106,47 @@ const Products = () => {
     },
   });
 
+  const handleMainImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploading(true);
+    try {
+      const url = await uploadFile(file);
+      setForm((prev) => ({ ...prev, image: url }));
+    } catch (err: any) {
+      toast({ title: "Upload failed", description: err.message, variant: "destructive" });
+    }
+    setUploading(false);
+    if (mainImageRef.current) mainImageRef.current.value = "";
+  };
+
+  const handleGalleryUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (!files?.length) return;
+    setUploading(true);
+    try {
+      const urls = await Promise.all(Array.from(files).map(uploadFile));
+      setForm((prev) => ({ ...prev, galleryImages: [...prev.galleryImages, ...urls] }));
+    } catch (err: any) {
+      toast({ title: "Upload failed", description: err.message, variant: "destructive" });
+    }
+    setUploading(false);
+    if (galleryRef.current) galleryRef.current.value = "";
+  };
+
+  const removeGalleryImage = (index: number) => {
+    setForm((prev) => ({
+      ...prev,
+      galleryImages: prev.galleryImages.filter((_, i) => i !== index),
+    }));
+  };
+
   const openEdit = (p: any) => {
     setEditId(p.id);
     setForm({
       name: p.name, price: String(p.price), collection: p.collection,
       material: p.material || "", description: p.description || "",
-      image: p.image || "", images: (p.images || []).join("\n"),
+      image: p.image || "", galleryImages: p.images || [],
       is_new: p.is_new || false, is_best_seller: p.is_best_seller || false,
       sizes: (p.sizes || []).join(", "),
     });
@@ -148,14 +197,64 @@ const Products = () => {
                 <Label>Description</Label>
                 <Textarea value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} />
               </div>
+
+              {/* Main Image Upload */}
               <div className="space-y-2">
-                <Label>Main Image URL</Label>
-                <Input value={form.image} onChange={(e) => setForm({ ...form, image: e.target.value })} />
+                <Label>Main Image</Label>
+                <input ref={mainImageRef} type="file" accept="image/*" className="hidden" onChange={handleMainImageUpload} />
+                {form.image ? (
+                  <div className="relative w-32 h-32 rounded-md overflow-hidden border border-border group">
+                    <img src={form.image} alt="Main" className="w-full h-full object-cover" />
+                    <button
+                      type="button"
+                      onClick={() => setForm({ ...form, image: "" })}
+                      className="absolute top-1 right-1 bg-destructive text-destructive-foreground rounded-full p-0.5 opacity-0 group-hover:opacity-100 transition-opacity"
+                    >
+                      <X className="h-3 w-3" />
+                    </button>
+                  </div>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => mainImageRef.current?.click()}
+                    disabled={uploading}
+                    className="w-32 h-32 border-2 border-dashed border-border rounded-md flex flex-col items-center justify-center gap-1 text-muted-foreground hover:border-primary hover:text-primary transition-colors"
+                  >
+                    <Upload className="h-5 w-5" />
+                    <span className="text-xs">Upload</span>
+                  </button>
+                )}
               </div>
+
+              {/* Gallery Images Upload */}
               <div className="space-y-2">
-                <Label>Gallery Image URLs (one per line)</Label>
-                <Textarea value={form.images} onChange={(e) => setForm({ ...form, images: e.target.value })} rows={3} />
+                <Label>Gallery Images</Label>
+                <input ref={galleryRef} type="file" accept="image/*" multiple className="hidden" onChange={handleGalleryUpload} />
+                <div className="flex flex-wrap gap-2">
+                  {form.galleryImages.map((url, i) => (
+                    <div key={i} className="relative w-20 h-20 rounded-md overflow-hidden border border-border group">
+                      <img src={url} alt={`Gallery ${i + 1}`} className="w-full h-full object-cover" />
+                      <button
+                        type="button"
+                        onClick={() => removeGalleryImage(i)}
+                        className="absolute top-0.5 right-0.5 bg-destructive text-destructive-foreground rounded-full p-0.5 opacity-0 group-hover:opacity-100 transition-opacity"
+                      >
+                        <X className="h-3 w-3" />
+                      </button>
+                    </div>
+                  ))}
+                  <button
+                    type="button"
+                    onClick={() => galleryRef.current?.click()}
+                    disabled={uploading}
+                    className="w-20 h-20 border-2 border-dashed border-border rounded-md flex flex-col items-center justify-center gap-1 text-muted-foreground hover:border-primary hover:text-primary transition-colors"
+                  >
+                    <ImageIcon className="h-4 w-4" />
+                    <span className="text-[10px]">Add</span>
+                  </button>
+                </div>
               </div>
+
               <div className="space-y-2">
                 <Label>Sizes (comma-separated)</Label>
                 <Input value={form.sizes} onChange={(e) => setForm({ ...form, sizes: e.target.value })} placeholder="5, 6, 7, 8" />
@@ -170,7 +269,8 @@ const Products = () => {
                   <Label>Best Seller</Label>
                 </div>
               </div>
-              <Button type="submit" className="w-full" disabled={saveMutation.isPending}>
+              {uploading && <p className="text-xs text-muted-foreground">Uploading image...</p>}
+              <Button type="submit" className="w-full" disabled={saveMutation.isPending || uploading}>
                 {saveMutation.isPending ? "Saving..." : editId ? "Update Product" : "Create Product"}
               </Button>
             </form>
