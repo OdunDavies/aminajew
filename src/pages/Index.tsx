@@ -92,7 +92,7 @@ const Index = () => {
       {/* New Arrivals */}
       <section className="py-24 px-6 bg-secondary">
         <div className="container mx-auto">
-          <div className="flex items-end justify-between mb-12">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-12 gap-4">
             <div>
               <p className="text-xs tracking-[0.3em] uppercase text-primary mb-3">Just Arrived</p>
               <h2 className="font-serif text-3xl md:text-4xl text-foreground">New Arrivals</h2>

@@ -56,11 +56,11 @@ const Checkout = () => {
                   <Label htmlFor="address" className="text-xs tracking-wider uppercase">Address</Label>
                   <Input id="address" className="bg-background" />
                 </div>
-                <div className="space-y-2">
+                <div className="sm:col-span-1 space-y-2">
                   <Label htmlFor="city" className="text-xs tracking-wider uppercase">City</Label>
                   <Input id="city" className="bg-background" />
                 </div>
-                <div className="space-y-2">
+                <div className="sm:col-span-1 space-y-2">
                   <Label htmlFor="zip" className="text-xs tracking-wider uppercase">Zip Code</Label>
                   <Input id="zip" className="bg-background" />
                 </div>

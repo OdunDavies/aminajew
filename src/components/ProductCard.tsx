@@ -38,7 +38,7 @@ const ProductCard = ({ product }: { product: Product }) => {
               e.preventDefault();
               addItem(product);
             }}
-            className="absolute bottom-3 right-3 bg-background/90 backdrop-blur-sm p-2.5 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-primary hover:text-primary-foreground"
+            className="absolute bottom-3 right-3 bg-background/90 backdrop-blur-sm p-2.5 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity hover:bg-primary hover:text-primary-foreground"
             aria-label={`Add ${product.name} to cart`}
           >
             <ShoppingBag size={16} />
