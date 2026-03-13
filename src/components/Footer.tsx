@@ -5,7 +5,7 @@ const Footer = () => (
     <div className="container mx-auto px-6 py-16">
       <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
         <div>
-          <h3 className="font-serif text-2xl text-primary mb-4">AURUM</h3>
+          <h3 className="font-serif text-2xl text-primary mb-4">artsybrands</h3>
           <p className="text-sm text-muted-foreground leading-relaxed">
             Exquisite jewelry crafted with passion, precision, and the finest materials from around the world.
           </p>
