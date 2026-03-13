@@ -37,7 +37,7 @@ export function AdminSidebar() {
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel>
-            {!collapsed && <span className="font-serif text-primary tracking-[0.15em]">AURUM ADMIN</span>}
+            {!collapsed && <span className="font-serif text-primary tracking-[0.15em]">artsybrands ADMIN</span>}
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>

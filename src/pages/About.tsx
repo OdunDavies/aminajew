@@ -18,7 +18,7 @@ const About = () => (
           Founded on the belief that jewelry is more than adornment — it's a language of love, a marker of milestones, and an expression of identity. At artsybrands, we marry centuries-old goldsmithing traditions with contemporary design sensibility.
         </motion.p>
         <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="text-muted-foreground leading-relaxed">
-          Every gemstone is ethically sourced. Every setting is hand-finished. Every piece undergoes rigorous quality inspection before earning the AURUM hallmark. We work with master artisans who bring decades of expertise to each creation.
+          Every gemstone is ethically sourced. Every setting is hand-finished. Every piece undergoes rigorous quality inspection before earning the artsybrands hallmark. We work with master artisans who bring decades of expertise to each creation.
         </motion.p>
         <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="text-muted-foreground leading-relaxed">
           Our commitment extends beyond beauty. We practice responsible sourcing, minimize environmental impact, and support the communities where our materials originate. Luxury, we believe, should leave the world better than it found it.

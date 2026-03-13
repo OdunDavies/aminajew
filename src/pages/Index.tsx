@@ -122,7 +122,7 @@ const Index = () => {
             <p className="text-xs tracking-[0.3em] uppercase text-primary mb-3">Our Story</p>
             <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-6">Crafted by Hand,<br />Worn With Pride</h2>
             <p className="text-muted-foreground leading-relaxed mb-4">
-              Every piece at AURUM is a testament to centuries-old craftsmanship, reimagined for the modern connoisseur. Our artisans dedicate countless hours to perfecting each detail.
+              Every piece at artsybrands is a testament to centuries-old craftsmanship, reimagined for the modern connoisseur. Our artisans dedicate countless hours to perfecting each detail.
             </p>
             <p className="text-muted-foreground leading-relaxed mb-8">
               From sourcing ethically mined gemstones to hand-polishing every facet, we believe luxury should be as meaningful as it is beautiful.
