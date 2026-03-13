@@ -16,7 +16,7 @@ const FAQ = () => (
   <div className="min-h-screen pt-24 pb-16 px-6">
     <SEO
       title="FAQ"
-      description="Find answers to common questions about artsybrands shipping, returns, diamond certifications, jewelry care, gift wrapping, and payment methods."
+      description="Find answers to common questions about artsybrands in Kuje, Abuja, FCT — shipping, returns, gold jewelry care, gold by the ounce, gift wrapping, and payment methods."
       jsonLd={{
         "@context": "https://schema.org",
         "@type": "FAQPage",

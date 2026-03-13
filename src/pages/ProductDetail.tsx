@@ -47,7 +47,7 @@ const ProductDetail = () => {
     <div className="min-h-screen pt-24 pb-16">
       <SEO
         title={product.name}
-        description={product.description || `Shop ${product.name} — handcrafted ${product.collection} by artsybrands. $${product.price.toFixed(2)}.`}
+        description={product.description || `Shop ${product.name} — handcrafted gold ${product.collection} by the ounce at artsybrands, Kuje, Abuja, FCT. $${product.price.toFixed(2)}.`}
         jsonLd={{
           "@context": "https://schema.org",
           "@type": "Product",

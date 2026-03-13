@@ -63,7 +63,7 @@ const Collections = () => {
     <div className="min-h-screen pt-24 pb-16 px-6">
       <SEO
         title={collection ? `${title} Collection` : "Collections"}
-        description={collection ? `Shop our ${title} collection — handcrafted luxury ${title.toLowerCase()} at artsybrands.` : "Browse artsybrands jewelry collections — rings, necklaces, bracelets, and earrings."}
+        description={collection ? `Shop our ${title} collection — handcrafted luxury gold ${title.toLowerCase()} by the ounce at artsybrands in Kuje, Abuja, FCT.` : "Browse artsybrands gold jewelry collections in Kuje, Abuja, FCT — rings, necklaces, bracelets, and earrings sold by the ounce."}
       />
       <div className="container mx-auto">
         <div className="text-center mb-12">
