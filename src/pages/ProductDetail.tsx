@@ -1,6 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { fetchProductById, fetchProductsByCollection, Product } from "@/data/products";
+import SEO from "@/components/SEO";
 import { useCart } from "@/context/CartContext";
 import { useState } from "react";
 import { motion } from "framer-motion";
@@ -44,6 +45,23 @@ const ProductDetail = () => {
 
   return (
     <div className="min-h-screen pt-24 pb-16">
+      <SEO
+        title={product.name}
+        description={product.description || `Shop ${product.name} — handcrafted ${product.collection} by artsybrands. $${product.price.toFixed(2)}.`}
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "Product",
+          name: product.name,
+          description: product.description,
+          image: product.image,
+          offers: {
+            "@type": "Offer",
+            price: product.price,
+            priceCurrency: "USD",
+            availability: "https://schema.org/InStock",
+          },
+        }}
+      />
       <div className="container mx-auto px-6">
         {/* Breadcrumb */}
         <div className="flex items-center gap-2 text-xs text-muted-foreground mb-8">

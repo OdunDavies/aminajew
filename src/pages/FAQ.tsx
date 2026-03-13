@@ -1,4 +1,5 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import SEO from "@/components/SEO";
 
 const faqs = [
   { q: "How long does shipping take?", a: "Standard shipping takes 5-7 business days. Express shipping (2-3 days) and overnight options are available at checkout. All orders over $500 qualify for free standard shipping." },
@@ -13,6 +14,19 @@ const faqs = [
 
 const FAQ = () => (
   <div className="min-h-screen pt-24 pb-16 px-6">
+    <SEO
+      title="FAQ"
+      description="Find answers to common questions about artsybrands shipping, returns, diamond certifications, jewelry care, gift wrapping, and payment methods."
+      jsonLd={{
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: faqs.map((f) => ({
+          "@type": "Question",
+          name: f.q,
+          acceptedAnswer: { "@type": "Answer", text: f.a },
+        })),
+      }}
+    />
     <div className="container mx-auto max-w-2xl">
       <div className="text-center mb-16">
         <p className="text-xs tracking-[0.3em] uppercase text-primary mb-3">Help Center</p>

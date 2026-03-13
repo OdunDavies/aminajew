@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import ProductCard from "@/components/ProductCard";
 import { fetchNewArrivals, fetchBestSellers } from "@/data/products";
 import { ArrowRight } from "lucide-react";
+import SEO from "@/components/SEO";
 
 const collections = [
   { name: "Rings", slug: "rings", image: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=500&h=600&fit=crop" },
@@ -18,6 +19,17 @@ const Index = () => {
 
   return (
     <div className="min-h-screen">
+      <SEO
+        title="artsybrands — Exquisite Handcrafted Jewelry"
+        description="Discover handcrafted jewelry pieces forged with passion and the finest materials. Shop rings, necklaces, bracelets, and earrings at artsybrands."
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: "artsybrands",
+          url: window.location.origin,
+          description: "Exquisite handcrafted jewelry — rings, necklaces, bracelets, and earrings.",
+        }}
+      />
       {/* Hero */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div

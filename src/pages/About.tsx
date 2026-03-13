@@ -1,7 +1,12 @@
 import { motion } from "framer-motion";
+import SEO from "@/components/SEO";
 
 const About = () => (
   <div className="min-h-screen pt-24 pb-16">
+    <SEO
+      title="About Us"
+      description="Learn about artsybrands — our story, craftsmanship philosophy, and commitment to ethically sourced, handcrafted luxury jewelry."
+    />
     {/* Hero */}
     <section className="relative h-[50vh] flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1617038220319-276d3cfab638?w=1920&h=600&fit=crop')" }} />
