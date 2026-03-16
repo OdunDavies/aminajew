@@ -29,7 +29,7 @@ const CartDrawer = () => {
                 <h4 className="font-serif text-sm text-foreground">{item.product.name}</h4>
                 <p className="text-xs text-muted-foreground">{item.product.material}</p>
                 {item.size && <p className="text-xs text-muted-foreground">Size: {item.size}</p>}
-                <p className="text-sm text-primary mt-1">${item.product.price.toLocaleString()}</p>
+                <p className="text-sm text-primary mt-1">₦{item.product.price.toLocaleString()}</p>
                 <div className="flex items-center gap-2 mt-2">
                   <button onClick={() => updateQuantity(item.product.id, item.quantity - 1)} className="text-muted-foreground hover:text-foreground">
                     <Minus size={14} />
