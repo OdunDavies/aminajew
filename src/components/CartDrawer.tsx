@@ -51,7 +51,7 @@ const CartDrawer = () => {
           <div className="border-t border-border pt-4 space-y-4">
             <div className="flex justify-between text-sm">
               <span className="text-muted-foreground">Subtotal</span>
-              <span className="text-foreground font-serif">${subtotal.toLocaleString()}</span>
+              <span className="text-foreground font-serif">₦{subtotal.toLocaleString()}</span>
             </div>
             <Link to="/checkout" onClick={() => setIsOpen(false)}>
               <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90 tracking-[0.1em] uppercase text-xs">

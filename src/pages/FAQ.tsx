@@ -8,7 +8,7 @@ const faqs = [
   { q: "How should I care for my jewelry?", a: "Store pieces separately in soft pouches. Clean gently with a soft cloth. Avoid contact with perfume, lotions, and harsh chemicals. We offer complimentary professional cleaning once a year." },
   { q: "Do you offer gift wrapping?", a: "Every artsybrands purchase comes in our signature gift box with a satin ribbon. Complimentary gift messaging is available at checkout." },
   { q: "Can I customize or engrave a piece?", a: "Yes! Many of our pieces can be engraved with a personal message. Select the engraving option on the product page or contact us for custom design requests." },
-  { q: "What payment methods do you accept?", a: "We accept all major credit cards (Visa, Mastercard, Amex) through our secure Stripe payment system. Apple Pay and Google Pay are also available." },
+  { q: "What payment methods do you accept?", a: "We accept all major payment methods through our secure Paystack payment system — cards (Visa, Mastercard, Verve), bank transfers, and USSD." },
   { q: "Do you ship internationally?", a: "Yes, we ship worldwide. International shipping rates and delivery times vary by destination. Customs duties may apply and are the responsibility of the buyer." },
 ];
 

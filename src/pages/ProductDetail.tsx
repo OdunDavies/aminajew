@@ -124,7 +124,7 @@ const ProductDetail = () => {
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 border-t border-border pt-8">
               {[
-                { icon: Truck, label: "Free Shipping", desc: "On orders $500+" },
+                { icon: Truck, label: "Free Shipping", desc: "On orders ₦500k+" },
                 { icon: Shield, label: "Authenticity", desc: "Certified genuine" },
                 { icon: RotateCcw, label: "30-Day Returns", desc: "Hassle-free" },
               ].map(({ icon: Icon, label, desc }) => (
