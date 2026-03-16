@@ -16,6 +16,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import FAQ from "./pages/FAQ";
 import NotFound from "./pages/NotFound";
+import PaymentVerify from "./pages/PaymentVerify";
 import AdminLogin from "./pages/admin/AdminLogin";
 import Products from "./pages/admin/Products";
 
