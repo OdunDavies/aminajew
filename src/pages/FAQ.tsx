@@ -2,7 +2,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import SEO from "@/components/SEO";
 
 const faqs = [
-  { q: "How long does shipping take?", a: "Standard shipping takes 5-7 business days. Express shipping (2-3 days) and overnight options are available at checkout. All orders over $500 qualify for free standard shipping." },
+  { q: "How long does shipping take?", a: "Standard shipping takes 5-7 business days. Express shipping (2-3 days) and overnight options are available at checkout. All orders over ₦500,000 qualify for free standard shipping." },
   { q: "What is your return policy?", a: "We offer a 30-day hassle-free return policy. Items must be in their original condition with all packaging. Custom or engraved pieces are final sale." },
   { q: "Are your diamonds certified?", a: "Yes, all diamonds over 0.30 carats come with a GIA or IGI certification. Certificates are included with your purchase." },
   { q: "How should I care for my jewelry?", a: "Store pieces separately in soft pouches. Clean gently with a soft cloth. Avoid contact with perfume, lotions, and harsh chemicals. We offer complimentary professional cleaning once a year." },
