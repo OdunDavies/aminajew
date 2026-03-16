@@ -47,7 +47,7 @@ const ProductDetail = () => {
     <div className="min-h-screen pt-24 pb-16">
       <SEO
         title={product.name}
-        description={product.description || `Shop ${product.name} — handcrafted gold ${product.collection} by the ounce at artsybrands, Kuje, Abuja, FCT. $${product.price.toFixed(2)}.`}
+        description={product.description || `Shop ${product.name} — handcrafted gold ${product.collection} by the ounce at artsybrands, Kuje, Abuja, FCT. ₦${product.price.toLocaleString()}.`}
         jsonLd={{
           "@context": "https://schema.org",
           "@type": "Product",
@@ -57,7 +57,7 @@ const ProductDetail = () => {
           offers: {
             "@type": "Offer",
             price: product.price,
-            priceCurrency: "USD",
+            priceCurrency: "NGN",
             availability: "https://schema.org/InStock",
           },
         }}
@@ -95,7 +95,7 @@ const ProductDetail = () => {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.2 }}>
             <p className="text-xs tracking-[0.2em] uppercase text-primary mb-2">{product.material}</p>
             <h1 className="font-serif text-3xl md:text-4xl text-foreground mb-4">{product.name}</h1>
-            <p className="font-serif text-2xl text-primary mb-6">${product.price.toLocaleString()}</p>
+            <p className="font-serif text-2xl text-primary mb-6">₦{product.price.toLocaleString()}</p>
             <p className="text-muted-foreground leading-relaxed mb-8">{product.description}</p>
 
             {product.sizes && (
@@ -124,7 +124,7 @@ const ProductDetail = () => {
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 border-t border-border pt-8">
               {[
-                { icon: Truck, label: "Free Shipping", desc: "On orders $500+" },
+                { icon: Truck, label: "Free Shipping", desc: "On orders ₦500k+" },
                 { icon: Shield, label: "Authenticity", desc: "Certified genuine" },
                 { icon: RotateCcw, label: "30-Day Returns", desc: "Hassle-free" },
               ].map(({ icon: Icon, label, desc }) => (

@@ -48,7 +48,7 @@ const ProductCard = ({ product }: { product: Product }) => {
       <div className="mt-3 space-y-1">
         <h3 className="font-serif text-sm text-foreground">{product.name}</h3>
         <p className="text-xs text-muted-foreground">{product.material}</p>
-        <p className="text-sm text-primary">${product.price.toLocaleString()}</p>
+        <p className="text-sm text-primary">₦{product.price.toLocaleString()}</p>
       </div>
     </motion.div>
   );

@@ -29,7 +29,7 @@ const CartDrawer = () => {
                 <h4 className="font-serif text-sm text-foreground">{item.product.name}</h4>
                 <p className="text-xs text-muted-foreground">{item.product.material}</p>
                 {item.size && <p className="text-xs text-muted-foreground">Size: {item.size}</p>}
-                <p className="text-sm text-primary mt-1">${item.product.price.toLocaleString()}</p>
+                <p className="text-sm text-primary mt-1">₦{item.product.price.toLocaleString()}</p>
                 <div className="flex items-center gap-2 mt-2">
                   <button onClick={() => updateQuantity(item.product.id, item.quantity - 1)} className="text-muted-foreground hover:text-foreground">
                     <Minus size={14} />
@@ -51,7 +51,7 @@ const CartDrawer = () => {
           <div className="border-t border-border pt-4 space-y-4">
             <div className="flex justify-between text-sm">
               <span className="text-muted-foreground">Subtotal</span>
-              <span className="text-foreground font-serif">${subtotal.toLocaleString()}</span>
+              <span className="text-foreground font-serif">₦{subtotal.toLocaleString()}</span>
             </div>
             <Link to="/checkout" onClick={() => setIsOpen(false)}>
               <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90 tracking-[0.1em] uppercase text-xs">
