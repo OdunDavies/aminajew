@@ -57,7 +57,7 @@ const ProductDetail = () => {
           offers: {
             "@type": "Offer",
             price: product.price,
-            priceCurrency: "USD",
+            priceCurrency: "NGN",
             availability: "https://schema.org/InStock",
           },
         }}
