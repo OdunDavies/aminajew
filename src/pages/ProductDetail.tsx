@@ -95,7 +95,7 @@ const ProductDetail = () => {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.2 }}>
             <p className="text-xs tracking-[0.2em] uppercase text-primary mb-2">{product.material}</p>
             <h1 className="font-serif text-3xl md:text-4xl text-foreground mb-4">{product.name}</h1>
-            <p className="font-serif text-2xl text-primary mb-6">${product.price.toLocaleString()}</p>
+            <p className="font-serif text-2xl text-primary mb-6">₦{product.price.toLocaleString()}</p>
             <p className="text-muted-foreground leading-relaxed mb-8">{product.description}</p>
 
             {product.sizes && (
