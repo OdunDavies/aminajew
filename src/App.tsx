@@ -16,6 +16,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import FAQ from "./pages/FAQ";
 import NotFound from "./pages/NotFound";
+import PaymentVerify from "./pages/PaymentVerify";
 import AdminLogin from "./pages/admin/AdminLogin";
 import Products from "./pages/admin/Products";
 
@@ -46,6 +47,7 @@ const App = () => (
                   <Route path="/collections/:collection" element={<Collections />} />
                   <Route path="/product/:id" element={<ProductDetail />} />
                   <Route path="/checkout" element={<Checkout />} />
+                  <Route path="/payment/verify" element={<PaymentVerify />} />
                   <Route path="/about" element={<About />} />
                   <Route path="/contact" element={<Contact />} />
                   <Route path="/faq" element={<FAQ />} />
