@@ -3,8 +3,9 @@ import { motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
 import ProductCard from "@/components/ProductCard";
 import { fetchNewArrivals, fetchBestSellers } from "@/data/products";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ChevronDown } from "lucide-react";
 import SEO from "@/components/SEO";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const collections = [
   { name: "Rings", slug: "rings", image: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=500&h=600&fit=crop" },
@@ -13,9 +14,22 @@ const collections = [
   { name: "Earrings", slug: "earrings", image: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=500&h=600&fit=crop" },
 ];
 
+const ProductGridSkeleton = () => (
+  <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+    {Array.from({ length: 4 }).map((_, i) => (
+      <div key={i} className="space-y-3">
+        <Skeleton className="aspect-square w-full" />
+        <Skeleton className="h-4 w-3/4" />
+        <Skeleton className="h-3 w-1/2" />
+        <Skeleton className="h-4 w-1/3" />
+      </div>
+    ))}
+  </div>
+);
+
 const Index = () => {
-  const { data: newArrivals = [] } = useQuery({ queryKey: ["new-arrivals"], queryFn: fetchNewArrivals });
-  const { data: bestSellers = [] } = useQuery({ queryKey: ["best-sellers"], queryFn: fetchBestSellers });
+  const { data: newArrivals = [], isLoading: loadingNew } = useQuery({ queryKey: ["new-arrivals"], queryFn: fetchNewArrivals });
+  const { data: bestSellers = [], isLoading: loadingBest } = useQuery({ queryKey: ["best-sellers"], queryFn: fetchBestSellers });
 
   return (
     <div className="min-h-screen">
@@ -56,6 +70,15 @@ const Index = () => {
           >
             Explore Collections <ArrowRight size={14} />
           </Link>
+        </motion.div>
+
+        {/* Scroll indicator */}
+        <motion.div
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 text-muted-foreground"
+          animate={{ y: [0, 8, 0] }}
+          transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+        >
+          <ChevronDown size={24} />
         </motion.div>
       </section>
 
@@ -101,11 +124,13 @@ const Index = () => {
               View All <ArrowRight size={12} />
             </Link>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {newArrivals.map((p) => (
-              <ProductCard key={p.id} product={p} />
-            ))}
-          </div>
+          {loadingNew ? <ProductGridSkeleton /> : (
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              {newArrivals.map((p) => (
+                <ProductCard key={p.id} product={p} />
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
@@ -156,11 +181,13 @@ const Index = () => {
             <p className="text-xs tracking-[0.3em] uppercase text-primary mb-3">Most Loved</p>
             <h2 className="font-serif text-3xl md:text-4xl text-foreground">Best Sellers</h2>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {bestSellers.map((p) => (
-              <ProductCard key={p.id} product={p} />
-            ))}
-          </div>
+          {loadingBest ? <ProductGridSkeleton /> : (
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              {bestSellers.map((p) => (
+                <ProductCard key={p.id} product={p} />
+              ))}
+            </div>
+          )}
         </div>
       </section>
     </div>

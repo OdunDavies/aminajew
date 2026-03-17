@@ -1,4 +1,5 @@
 import { useCart } from "@/context/CartContext";
+import { useCurrency } from "@/context/CurrencyContext";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -7,7 +8,7 @@ import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import SEO from "@/components/SEO";
-import { Loader2 } from "lucide-react";
+import { Loader2, ArrowLeft } from "lucide-react";
 
 const shippingOptions = [
   { id: "standard", label: "Standard Shipping", price: 0, estimate: "5-7 business days" },
@@ -17,6 +18,7 @@ const shippingOptions = [
 
 const Checkout = () => {
   const { items, subtotal } = useCart();
+  const { formatPrice } = useCurrency();
   const [shipping, setShipping] = useState("standard");
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
@@ -98,6 +100,9 @@ const Checkout = () => {
     <div className="min-h-screen pt-24 pb-16 px-6">
       <SEO title="Checkout" description="Complete your artsybrands gold jewelry purchase securely from Kuje, Abuja, FCT." />
       <div className="container mx-auto max-w-4xl">
+        <Link to="/collections" className="inline-flex items-center gap-2 text-xs text-muted-foreground hover:text-primary transition-colors mb-6">
+          <ArrowLeft size={14} /> Back to shopping
+        </Link>
         <h1 className="font-serif text-3xl text-foreground text-center mb-12">Checkout</h1>
 
         <div className="grid md:grid-cols-5 gap-12">
@@ -165,7 +170,7 @@ const Checkout = () => {
                         <p className="text-xs text-muted-foreground">{opt.estimate}</p>
                       </div>
                     </div>
-                    <span className="text-sm text-foreground">{opt.price === 0 ? "Free" : `₦${opt.price.toLocaleString()}`}</span>
+                    <span className="text-sm text-foreground">{opt.price === 0 ? "Free" : formatPrice(opt.price)}</span>
                   </label>
                 ))}
               </div>
@@ -182,7 +187,7 @@ const Checkout = () => {
                   Processing...
                 </>
               ) : (
-                `Pay ₦${total.toLocaleString()}`
+                `Pay ${formatPrice(total)}`
               )}
             </Button>
             <p className="text-xs text-muted-foreground text-center">Secured by Paystack</p>
@@ -200,22 +205,22 @@ const Checkout = () => {
                       <p className="text-sm text-foreground">{item.product.name}</p>
                       <p className="text-xs text-muted-foreground">Qty: {item.quantity}</p>
                     </div>
-                    <p className="text-sm text-foreground">₦{(item.product.price * item.quantity).toLocaleString()}</p>
+                    <p className="text-sm text-foreground">{formatPrice(item.product.price * item.quantity)}</p>
                   </div>
                 ))}
               </div>
               <div className="border-t border-border pt-4 space-y-2 text-sm">
                 <div className="flex justify-between text-muted-foreground">
                   <span>Subtotal</span>
-                  <span>₦{subtotal.toLocaleString()}</span>
+                  <span>{formatPrice(subtotal)}</span>
                 </div>
                 <div className="flex justify-between text-muted-foreground">
                   <span>Shipping</span>
-                  <span>{shippingCost === 0 ? "Free" : `₦${shippingCost.toLocaleString()}`}</span>
+                  <span>{shippingCost === 0 ? "Free" : formatPrice(shippingCost)}</span>
                 </div>
                 <div className="flex justify-between text-foreground font-serif text-lg pt-2 border-t border-border">
                   <span>Total</span>
-                  <span className="text-primary">₦{total.toLocaleString()}</span>
+                  <span className="text-primary">{formatPrice(total)}</span>
                 </div>
               </div>
             </div>

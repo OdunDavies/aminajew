@@ -1,4 +1,5 @@
 import { useCart } from "@/context/CartContext";
+import { useCurrency } from "@/context/CurrencyContext";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Minus, Plus, Trash2 } from "lucide-react";
@@ -6,6 +7,7 @@ import { Link } from "react-router-dom";
 
 const CartDrawer = () => {
   const { items, isOpen, setIsOpen, removeItem, updateQuantity, subtotal } = useCart();
+  const { formatPrice } = useCurrency();
 
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -29,7 +31,7 @@ const CartDrawer = () => {
                 <h4 className="font-serif text-sm text-foreground">{item.product.name}</h4>
                 <p className="text-xs text-muted-foreground">{item.product.material}</p>
                 {item.size && <p className="text-xs text-muted-foreground">Size: {item.size}</p>}
-                <p className="text-sm text-primary mt-1">₦{item.product.price.toLocaleString()}</p>
+                <p className="text-sm text-primary mt-1">{formatPrice(item.product.price)}</p>
                 <div className="flex items-center gap-2 mt-2">
                   <button onClick={() => updateQuantity(item.product.id, item.quantity - 1)} className="text-muted-foreground hover:text-foreground">
                     <Minus size={14} />
@@ -51,13 +53,20 @@ const CartDrawer = () => {
           <div className="border-t border-border pt-4 space-y-4">
             <div className="flex justify-between text-sm">
               <span className="text-muted-foreground">Subtotal</span>
-              <span className="text-foreground font-serif">₦{subtotal.toLocaleString()}</span>
+              <span className="text-foreground font-serif">{formatPrice(subtotal)}</span>
             </div>
             <Link to="/checkout" onClick={() => setIsOpen(false)}>
               <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90 tracking-[0.1em] uppercase text-xs">
                 Proceed to Checkout
               </Button>
             </Link>
+            <Button
+              variant="ghost"
+              className="w-full text-xs tracking-[0.1em] uppercase text-muted-foreground hover:text-primary"
+              onClick={() => setIsOpen(false)}
+            >
+              Continue Shopping
+            </Button>
           </div>
         )}
       </SheetContent>

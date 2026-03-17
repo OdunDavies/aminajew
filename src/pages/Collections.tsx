@@ -4,6 +4,7 @@ import { fetchProducts, fetchProductsByCollection } from "@/data/products";
 import ProductCard from "@/components/ProductCard";
 import { motion } from "framer-motion";
 import SEO from "@/components/SEO";
+import { Skeleton } from "@/components/ui/skeleton";
 
 import ringsImg from "@/assets/collection-rings.jpg";
 import necklacesImg from "@/assets/collection-necklaces.jpg";
@@ -47,6 +48,19 @@ const CollectionCards = () => (
   </div>
 );
 
+const ProductGridSkeleton = () => (
+  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    {Array.from({ length: 8 }).map((_, i) => (
+      <div key={i} className="space-y-3">
+        <Skeleton className="aspect-square w-full" />
+        <Skeleton className="h-4 w-3/4" />
+        <Skeleton className="h-3 w-1/2" />
+        <Skeleton className="h-4 w-1/3" />
+      </div>
+    ))}
+  </div>
+);
+
 const Collections = () => {
   const { collection } = useParams();
   const title = collection
@@ -66,6 +80,17 @@ const Collections = () => {
         description={collection ? `Shop our ${title} collection — handcrafted luxury gold ${title.toLowerCase()} by the ounce at artsybrands in Kuje, Abuja, FCT.` : "Browse artsybrands gold jewelry collections in Kuje, Abuja, FCT — rings, necklaces, bracelets, and earrings sold by the ounce."}
       />
       <div className="container mx-auto">
+        {/* Breadcrumb */}
+        {collection && (
+          <div className="flex items-center gap-2 text-xs text-muted-foreground mb-8">
+            <Link to="/" className="hover:text-primary">Home</Link>
+            <span>/</span>
+            <Link to="/collections" className="hover:text-primary">Collections</Link>
+            <span>/</span>
+            <span className="text-foreground capitalize">{title}</span>
+          </div>
+        )}
+
         <div className="text-center mb-12">
           <p className="text-xs tracking-[0.3em] uppercase text-primary mb-3">
             {collection ? "Collection" : "Browse"}
@@ -76,7 +101,7 @@ const Collections = () => {
         {!collection ? (
           <CollectionCards />
         ) : isLoading ? (
-          <p className="text-center text-muted-foreground py-20">Loading...</p>
+          <ProductGridSkeleton />
         ) : (
           <>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">

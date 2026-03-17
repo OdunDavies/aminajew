@@ -66,8 +66,8 @@ const Contact = () => {
           <div className="space-y-8">
             <h2 className="font-serif text-xl text-foreground mb-6">Visit Us</h2>
             {[
-              { icon: MapPin, title: "Address", text: "123 Luxury Lane\nNew York, NY 10001" },
-              { icon: Phone, title: "Phone", text: "+1 (555) 123-4567" },
+              { icon: MapPin, title: "Address", text: "EN 104, Federal Lowcost Housing Estate\nKuje, FCT, Nigeria" },
+              { icon: Phone, title: "Phone", text: "09068087189" },
               { icon: Mail, title: "Email", text: "hello@artsybrands.com" },
             ].map(({ icon: Icon, title, text }) => (
               <div key={title} className="flex gap-4">
