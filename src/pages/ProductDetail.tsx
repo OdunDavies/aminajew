@@ -3,14 +3,17 @@ import { useQuery } from "@tanstack/react-query";
 import { fetchProductById, fetchProductsByCollection, Product } from "@/data/products";
 import SEO from "@/components/SEO";
 import { useCart } from "@/context/CartContext";
+import { useCurrency } from "@/context/CurrencyContext";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import ProductCard from "@/components/ProductCard";
 import { ShoppingBag, Truck, Shield, RotateCcw } from "lucide-react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const ProductDetail = () => {
   const { id } = useParams();
   const { addItem } = useCart();
+  const { formatPrice } = useCurrency();
   const [selectedImage, setSelectedImage] = useState(0);
   const [selectedSize, setSelectedSize] = useState<string | undefined>();
 
@@ -31,7 +34,21 @@ const ProductDetail = () => {
   });
 
   if (isLoading) {
-    return <div className="min-h-screen pt-32 text-center text-muted-foreground">Loading...</div>;
+    return (
+      <div className="min-h-screen pt-24 pb-16">
+        <div className="container mx-auto px-6">
+          <div className="grid md:grid-cols-2 gap-12 lg:gap-20">
+            <Skeleton className="aspect-square w-full" />
+            <div className="space-y-4">
+              <Skeleton className="h-4 w-24" />
+              <Skeleton className="h-10 w-3/4" />
+              <Skeleton className="h-8 w-32" />
+              <Skeleton className="h-20 w-full" />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   if (!product) {
@@ -47,7 +64,7 @@ const ProductDetail = () => {
     <div className="min-h-screen pt-24 pb-16">
       <SEO
         title={product.name}
-        description={product.description || `Shop ${product.name} — handcrafted gold ${product.collection} by the ounce at artsybrands, Kuje, Abuja, FCT. ₦${product.price.toLocaleString()}.`}
+        description={product.description || `Shop ${product.name} — handcrafted gold ${product.collection} by the ounce at artsybrands, Kuje, Abuja, FCT. ${formatPrice(product.price)}.`}
         jsonLd={{
           "@context": "https://schema.org",
           "@type": "Product",
@@ -89,13 +106,24 @@ const ProductDetail = () => {
                 </button>
               ))}
             </div>
+            {/* Swipe indicator on mobile */}
+            {product.images.length > 1 && (
+              <div className="flex justify-center gap-1.5 mt-3 md:hidden">
+                {product.images.map((_, i) => (
+                  <span
+                    key={i}
+                    className={`w-1.5 h-1.5 rounded-full transition-colors ${selectedImage === i ? "bg-primary" : "bg-border"}`}
+                  />
+                ))}
+              </div>
+            )}
           </motion.div>
 
           {/* Details */}
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.2 }}>
             <p className="text-xs tracking-[0.2em] uppercase text-primary mb-2">{product.material}</p>
             <h1 className="font-serif text-3xl md:text-4xl text-foreground mb-4">{product.name}</h1>
-            <p className="font-serif text-2xl text-primary mb-6">₦{product.price.toLocaleString()}</p>
+            <p className="font-serif text-2xl text-primary mb-6">{formatPrice(product.price)}</p>
             <p className="text-muted-foreground leading-relaxed mb-8">{product.description}</p>
 
             {product.sizes && (

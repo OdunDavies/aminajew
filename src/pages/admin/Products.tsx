@@ -171,9 +171,12 @@ const Products = () => {
                   <Label>Name</Label>
                   <Input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} required />
                 </div>
-                <div className="space-y-2">
-                  <Label>Price</Label>
-                  <Input type="number" step="0.01" value={form.price} onChange={(e) => setForm({ ...form, price: e.target.value })} required />
+                 <div className="space-y-2">
+                  <Label>Price (₦)</Label>
+                  <div className="relative">
+                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">₦</span>
+                    <Input type="number" step="0.01" value={form.price} onChange={(e) => setForm({ ...form, price: e.target.value })} required className="pl-7" />
+                  </div>
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-4">

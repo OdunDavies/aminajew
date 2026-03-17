@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ShoppingBag, Menu, X, Search } from "lucide-react";
 import { useCart } from "@/context/CartContext";
+import { useCurrency } from "@/context/CurrencyContext";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -12,6 +13,7 @@ const navLinks = [
 
 const Navbar = () => {
   const { totalItems, setIsOpen } = useCart();
+  const { currency, toggleCurrency } = useCurrency();
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
@@ -46,7 +48,15 @@ const Navbar = () => {
           </nav>
 
           {/* Actions */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
+            {/* Currency toggle */}
+            <button
+              onClick={toggleCurrency}
+              className="text-xs font-medium tracking-wider border border-border rounded-full px-2.5 py-1 text-muted-foreground hover:text-primary hover:border-primary transition-colors"
+              aria-label="Toggle currency"
+            >
+              {currency === "NGN" ? "₦" : "$"}
+            </button>
             <Link to="/collections" className="text-muted-foreground hover:text-primary transition-colors">
               <Search size={20} />
             </Link>
