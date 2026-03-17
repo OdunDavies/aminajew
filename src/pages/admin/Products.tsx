@@ -301,7 +301,7 @@ const Products = () => {
                   </TableCell>
                   <TableCell className="font-medium">{p.name}</TableCell>
                   <TableCell className="capitalize">{p.collection}</TableCell>
-                  <TableCell>${Number(p.price).toLocaleString()}</TableCell>
+                  <TableCell>₦{Number(p.price).toLocaleString()}</TableCell>
                   <TableCell className="space-x-1">
                     {p.is_new && <Badge variant="secondary" className="text-[10px]">New</Badge>}
                     {p.is_best_seller && <Badge className="text-[10px]">Bestseller</Badge>}
