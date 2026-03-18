@@ -8,6 +8,7 @@ import { CurrencyProvider } from "@/context/CurrencyContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CartDrawer from "@/components/CartDrawer";
+import ScrollToTop from "@/components/ScrollToTop";
 import AdminLayout from "@/components/admin/AdminLayout";
 import Index from "./pages/Index";
 import Collections from "./pages/Collections";
@@ -27,40 +28,44 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <CurrencyProvider>
-      <CartProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <Routes>
-            {/* Admin routes - no store navbar/footer */}
-            <Route path="/admin/login" element={<AdminLogin />} />
-            <Route path="/admin" element={<AdminLayout />}>
-              <Route index element={<Products />} />
-            </Route>
+        <CartProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <ScrollToTop />
+            <Routes>
+              {/* Admin routes - no store navbar/footer */}
+              <Route path="/admin/login" element={<AdminLogin />} />
+              <Route path="/admin" element={<AdminLayout />}>
+                <Route index element={<Products />} />
+              </Route>
 
-            {/* Storefront routes */}
-            <Route path="/*" element={
-              <>
-                <Navbar />
-                <CartDrawer />
-                <Routes>
-                  <Route path="/" element={<Index />} />
-                  <Route path="/collections" element={<Collections />} />
-                  <Route path="/collections/:collection" element={<Collections />} />
-                  <Route path="/product/:id" element={<ProductDetail />} />
-                  <Route path="/checkout" element={<Checkout />} />
-                  <Route path="/payment/verify" element={<PaymentVerify />} />
-                  <Route path="/about" element={<About />} />
-                  <Route path="/contact" element={<Contact />} />
-                  <Route path="/faq" element={<FAQ />} />
-                  <Route path="*" element={<NotFound />} />
-                </Routes>
-                <Footer />
-              </>
-            } />
-          </Routes>
-        </BrowserRouter>
-      </CartProvider>
+              {/* Storefront routes */}
+              <Route
+                path="/*"
+                element={
+                  <>
+                    <Navbar />
+                    <CartDrawer />
+                    <Routes>
+                      <Route path="/" element={<Index />} />
+                      <Route path="/collections" element={<Collections />} />
+                      <Route path="/collections/:collection" element={<Collections />} />
+                      <Route path="/product/:id" element={<ProductDetail />} />
+                      <Route path="/checkout" element={<Checkout />} />
+                      <Route path="/payment/verify" element={<PaymentVerify />} />
+                      <Route path="/about" element={<About />} />
+                      <Route path="/contact" element={<Contact />} />
+                      <Route path="/faq" element={<FAQ />} />
+                      <Route path="*" element={<NotFound />} />
+                    </Routes>
+                    <Footer />
+                  </>
+                }
+              />
+            </Routes>
+          </BrowserRouter>
+        </CartProvider>
       </CurrencyProvider>
     </TooltipProvider>
   </QueryClientProvider>
