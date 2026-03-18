@@ -22,8 +22,10 @@ const Checkout = () => {
   const [shipping, setShipping] = useState("standard");
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
-    firstName: "", lastName: "", email: "", phone: "",
-    address: "", city: "", zip: "", country: "Nigeria",
+    name: "",
+    email: "",
+    phone: "",
+    address: "",
   });
 
   const shippingCost = shippingOptions.find((o) => o.id === shipping)?.price || 0;
@@ -34,7 +36,7 @@ const Checkout = () => {
   };
 
   const handlePay = async () => {
-    if (!form.firstName || !form.lastName || !form.email || !form.address || !form.city) {
+    if (!form.name || !form.email || !form.address) {
       toast.error("Please fill in all required fields");
       return;
     }
@@ -49,15 +51,12 @@ const Checkout = () => {
           amount: total,
           callback_url: callbackUrl,
           metadata: {
-            customer_name: `${form.firstName} ${form.lastName}`,
+            customer_name: form.name,
             customer_email: form.email,
             customer_phone: form.phone,
-            shipping_address: `${form.address}, ${form.city}, ${form.zip}, ${form.country}`,
+            shipping_address: form.address,
             shipping_address_obj: {
               address: form.address,
-              city: form.city,
-              zip: form.zip,
-              country: form.country,
             },
             items: items.map((i) => ({
               id: i.product.id,
@@ -111,13 +110,9 @@ const Checkout = () => {
             <div>
               <h2 className="font-serif text-lg text-foreground mb-4">Delivery Address</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="firstName" className="text-xs tracking-wider uppercase">First Name *</Label>
-                  <Input id="firstName" value={form.firstName} onChange={handleChange} className="bg-background" />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="lastName" className="text-xs tracking-wider uppercase">Last Name *</Label>
-                  <Input id="lastName" value={form.lastName} onChange={handleChange} className="bg-background" />
+                <div className="sm:col-span-2 space-y-2">
+                  <Label htmlFor="name" className="text-xs tracking-wider uppercase">Full Name *</Label>
+                  <Input id="name" value={form.name} onChange={handleChange} className="bg-background" />
                 </div>
                 <div className="sm:col-span-2 space-y-2">
                   <Label htmlFor="email" className="text-xs tracking-wider uppercase">Email *</Label>
@@ -130,18 +125,6 @@ const Checkout = () => {
                 <div className="sm:col-span-2 space-y-2">
                   <Label htmlFor="address" className="text-xs tracking-wider uppercase">Address *</Label>
                   <Input id="address" value={form.address} onChange={handleChange} className="bg-background" />
-                </div>
-                <div className="sm:col-span-1 space-y-2">
-                  <Label htmlFor="city" className="text-xs tracking-wider uppercase">City *</Label>
-                  <Input id="city" value={form.city} onChange={handleChange} className="bg-background" />
-                </div>
-                <div className="sm:col-span-1 space-y-2">
-                  <Label htmlFor="zip" className="text-xs tracking-wider uppercase">Zip Code</Label>
-                  <Input id="zip" value={form.zip} onChange={handleChange} className="bg-background" />
-                </div>
-                <div className="sm:col-span-2 space-y-2">
-                  <Label htmlFor="country" className="text-xs tracking-wider uppercase">Country</Label>
-                  <Input id="country" value={form.country} onChange={handleChange} className="bg-background" />
                 </div>
               </div>
             </div>
