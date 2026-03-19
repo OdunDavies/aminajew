@@ -250,6 +250,27 @@ export type Database = {
         }
         Relationships: []
       }
+      rate_limit_events: {
+        Row: {
+          action: string
+          created_at: string
+          id: string
+          identifier: string
+        }
+        Insert: {
+          action: string
+          created_at?: string
+          id?: string
+          identifier: string
+        }
+        Update: {
+          action?: string
+          created_at?: string
+          id?: string
+          identifier?: string
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           id: string
@@ -279,6 +300,16 @@ export type Database = {
           _user_id: string
         }
         Returns: boolean
+      }
+      submit_contact_submission: {
+        Args: {
+          p_email: string
+          p_message?: string
+          p_name: string
+          p_subject?: string
+          p_website?: string
+        }
+        Returns: string
       }
     }
     Enums: {
