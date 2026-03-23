@@ -112,8 +112,23 @@ export async function PUT(req: Request) {
 
   const updated: SiteContent = {
     brand: b
-      ? { name: b.name, tagline: b.tagline, address: b.address, phone: b.phone,
-          email: b.email, hours: b.hours, social: b.social }
+      ? {
+          name: b.name,
+          tagline: b.tagline,
+          address: b.address,
+          phone: b.phone,
+          email: b.email,
+          hours: {
+            weekdays: b.hours.weekdays,
+            saturday: b.hours.saturday,
+            sunday: b.hours.sunday,
+          },
+          social: {
+            instagram: b.social.instagram,
+            facebook: b.social.facebook,
+            twitter: b.social.twitter,
+          },
+        }
       : current.brand,
     homepage: h
       ? { hero: h.hero, collections: h.collections, story: h.story }
