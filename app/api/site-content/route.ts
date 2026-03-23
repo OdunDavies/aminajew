@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
-import { readSiteContent, writeSiteContent } from "@/lib/site-content-store";
+import { readSiteContent, writeSiteContent, type SiteContent } from "@/lib/site-content-store";
 import { verifyAdmin } from "@/lib/verify-admin";
 
 export async function GET() {
@@ -105,12 +105,26 @@ export async function PUT(req: Request) {
   }
 
   const current = readSiteContent();
-  const updated = {
-    brand: parsed.data.brand ?? current.brand,
-    homepage: parsed.data.homepage ?? current.homepage,
-    about: parsed.data.about ?? current.about,
+  const b = parsed.data.brand;
+  const h = parsed.data.homepage;
+  const a = parsed.data.about;
+  const s = parsed.data.seo;
+
+  const updated: SiteContent = {
+    brand: b
+      ? { name: b.name, tagline: b.tagline, address: b.address, phone: b.phone,
+          email: b.email, hours: b.hours, social: b.social }
+      : current.brand,
+    homepage: h
+      ? { hero: h.hero, collections: h.collections, story: h.story }
+      : current.homepage,
+    about: a
+      ? { heroImage: a.heroImage, paragraphs: a.paragraphs, stats: a.stats }
+      : current.about,
     faq: parsed.data.faq ?? current.faq,
-    seo: parsed.data.seo ?? current.seo,
+    seo: s
+      ? { title: s.title, description: s.description, keywords: s.keywords, ogImage: s.ogImage }
+      : current.seo,
   };
 
   writeSiteContent(updated);
