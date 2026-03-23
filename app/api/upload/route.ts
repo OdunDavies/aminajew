@@ -50,7 +50,7 @@ export async function POST(request: Request) {
   // Try Netlify Blobs (production)
   try {
     const store = getStore({ name: "uploads", consistency: "strong" });
-    await store.set(key, buffer, { metadata: { contentType } });
+    await store.set(key, new Blob([buffer], { type: contentType }), { metadata: { contentType } });
     return NextResponse.json({ url: `/api/uploads/${key}` }, { status: 201 });
   } catch {
     // Local dev fallback — write to public/uploads/
