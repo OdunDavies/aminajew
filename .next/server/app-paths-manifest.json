@@ -1,6 +1,4 @@
 {
-  "/admin/login/page": "app/admin/login/page.js",
-  "/admin/page": "app/admin/page.js",
-  "/admin/content/page": "app/admin/content/page.js",
+  "/icon.png/route": "app/icon.png/route.js",
   "/(storefront)/page": "app/(storefront)/page.js"
 }
