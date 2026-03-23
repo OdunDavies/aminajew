@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import ProductCard from "@/components/ProductCard";
 import { ArrowRight, ChevronDown } from "lucide-react";
@@ -20,9 +21,13 @@ export default function HomePageClient({ newArrivals, bestSellers, homepageConte
     <div className="min-h-screen">
       {/* Hero */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url('${hero.backgroundImage}')` }}
+        <Image
+          src={hero.backgroundImage}
+          alt="Hero background"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
         />
         <div className="absolute inset-0 bg-background/70" />
         <motion.div
@@ -72,7 +77,13 @@ export default function HomePageClient({ newArrivals, bestSellers, homepageConte
                 transition={{ duration: 0.5, delay: i * 0.1 }}
               >
                 <Link href={`/collections/${col.slug}`} className="group block relative overflow-hidden aspect-[3/4]">
-                  <img src={col.image} alt={col.label} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy" />
+                  <Image
+                    src={col.image}
+                    alt={col.label}
+                    fill
+                    sizes="(max-width: 768px) 50vw, 25vw"
+                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
                   <div className="absolute inset-0 bg-background/40 group-hover:bg-background/20 transition-colors" />
                   <div className="absolute bottom-6 left-6">
                     <h3 className="font-serif text-lg text-foreground">{col.label}</h3>
@@ -113,12 +124,14 @@ export default function HomePageClient({ newArrivals, bestSellers, homepageConte
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
+            className="relative aspect-[3/4] w-full"
           >
-            <img
+            <Image
               src={story.image}
               alt="Craftsmanship"
-              className="w-full aspect-[3/4] object-cover"
-              loading="lazy"
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="object-cover"
             />
           </motion.div>
           <motion.div

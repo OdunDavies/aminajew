@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import AboutContent from "@/components/AboutContent";
 import { readSiteContent } from "@/lib/site-content-store";
 
@@ -15,9 +16,13 @@ export default function AboutPage() {
     <div className="min-h-screen pt-24 pb-16">
       {/* Hero */}
       <section className="relative h-[50vh] flex items-center justify-center overflow-hidden">
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url('${about.heroImage}')` }}
+        <Image
+          src={about.heroImage}
+          alt="About artsybrands"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
         />
         <div className="absolute inset-0 bg-background/70" />
         <div className="relative text-center z-10">

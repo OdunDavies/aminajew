@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import { readProducts, writeProducts, type StoredProduct } from "@/lib/products-store";
 import { verifyAdmin } from "@/lib/verify-admin";
+import { invalidateProductsCache } from "@/data/products";
 
 const productSchema = z.object({
   name: z.string().min(1, "Name is required").max(200),
@@ -51,6 +52,7 @@ export async function POST(request: Request) {
   const products = readProducts();
   products.push(product);
   writeProducts(products);
+  invalidateProductsCache();
 
   return NextResponse.json(product, { status: 201 });
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import type { CollectionItem } from "@/lib/site-content-store";
 
@@ -22,10 +23,12 @@ export default function CollectionsClient({ collections }: Props) {
             href={`/collections/${c.slug}`}
             className="group relative block aspect-[3/4] overflow-hidden rounded-sm"
           >
-            <img
+            <Image
               src={c.image}
               alt={c.label}
-              className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              fill
+              sizes="(max-width: 768px) 50vw, 50vw"
+              className="object-cover transition-transform duration-500 group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors duration-300" />
             <div className="absolute inset-0 flex items-end p-4 md:p-6">

@@ -11,31 +11,6 @@
       "static/chunks/main-app.js",
       "static/chunks/app/not-found.js"
     ],
-    "/(storefront)/layout": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(storefront)/layout.js"
-    ],
-    "/(storefront)/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(storefront)/page.js"
-    ],
-    "/(storefront)/faq/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(storefront)/faq/page.js"
-    ],
-    "/(storefront)/collections/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(storefront)/collections/page.js"
-    ],
-    "/(storefront)/collections/[collection]/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(storefront)/collections/[collection]/page.js"
-    ],
     "/admin/layout": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
@@ -61,21 +36,6 @@
       "static/chunks/main-app.js",
       "static/chunks/app/api/products/route.js"
     ],
-    "/api/upload/route": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/api/upload/route.js"
-    ],
-    "/api/products/[id]/route": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/api/products/[id]/route.js"
-    ],
-    "/(storefront)/product/[id]/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(storefront)/product/[id]/page.js"
-    ],
     "/admin/content/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
@@ -86,20 +46,15 @@
       "static/chunks/main-app.js",
       "static/chunks/app/api/site-content/route.js"
     ],
-    "/api/admin/logout/route": [
+    "/(storefront)/layout": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/api/admin/logout/route.js"
+      "static/chunks/app/(storefront)/layout.js"
     ],
-    "/(storefront)/checkout/page": [
+    "/(storefront)/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/(storefront)/checkout/page.js"
-    ],
-    "/api/payment/initialize/route": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/api/payment/initialize/route.js"
+      "static/chunks/app/(storefront)/page.js"
     ]
   }
 }

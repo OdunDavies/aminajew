@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Product } from "@/data/products";
 import { motion } from "framer-motion";
 import { useCart } from "@/context/CartContext";
@@ -21,11 +22,12 @@ const ProductCard = ({ product }: { product: Product }) => {
     >
       <Link href={`/product/${product.id}`} className="block">
         <div className="relative overflow-hidden aspect-square bg-secondary">
-          <img
-            src={product.image}
+          <Image
+            src={product.image || "/placeholder.svg"}
             alt={product.name}
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-            loading="lazy"
+            fill
+            sizes="(max-width: 768px) 50vw, 25vw"
+            className="object-cover transition-transform duration-700 group-hover:scale-110"
           />
           {product.isNew ? (
             <span className="absolute top-3 left-3 bg-primary text-primary-foreground text-[10px] tracking-[0.15em] uppercase px-3 py-1">

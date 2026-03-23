@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import { readProducts, writeProducts } from "@/lib/products-store";
 import { verifyAdmin } from "@/lib/verify-admin";
+import { invalidateProductsCache } from "@/data/products";
 import fs from "fs";
 import path from "path";
 
@@ -48,6 +49,7 @@ export async function PUT(request: Request, { params }: Params) {
   };
 
   writeProducts(products);
+  invalidateProductsCache();
   return NextResponse.json(products[index]);
 }
 
@@ -79,5 +81,6 @@ export async function DELETE(_request: Request, { params }: Params) {
   }
 
   writeProducts(products.filter((p) => p.id !== id));
+  invalidateProductsCache();
   return NextResponse.json({ ok: true });
 }

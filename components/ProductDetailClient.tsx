@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { useCart } from "@/context/CartContext";
@@ -35,11 +36,14 @@ export default function ProductDetailClient({ product, related }: Props) {
         <div className="grid md:grid-cols-2 gap-12 lg:gap-20">
           {/* Images */}
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
-            <div className="aspect-square overflow-hidden bg-secondary mb-4">
-              <img
-                src={product.images[selectedImage] || product.image}
+            <div className="relative aspect-square overflow-hidden bg-secondary mb-4">
+              <Image
+                src={product.images[selectedImage] || product.image || "/placeholder.svg"}
                 alt={product.name}
-                className="w-full h-full object-cover"
+                fill
+                priority
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover"
               />
             </div>
             {product.images.length > 1 && (
@@ -49,9 +53,9 @@ export default function ProductDetailClient({ product, related }: Props) {
                     <button
                       key={i}
                       onClick={() => setSelectedImage(i)}
-                      className={`aspect-square overflow-hidden border-2 transition-colors ${selectedImage === i ? "border-primary" : "border-transparent"}`}
+                      className={`relative aspect-square overflow-hidden border-2 transition-colors ${selectedImage === i ? "border-primary" : "border-transparent"}`}
                     >
-                      <img src={img} alt={`${product.name} view ${i + 1}`} className="w-full h-full object-cover" loading="lazy" />
+                      <Image src={img} alt={`${product.name} view ${i + 1}`} fill sizes="80px" className="object-cover" />
                     </button>
                   ))}
                 </div>
