@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { readSiteContent } from "@/lib/site-content-store";
 
-const Footer = () => {
-  const { brand } = readSiteContent();
+const Footer = async () => {
+  const { brand } = await readSiteContent();
 
   return (
     <footer className="bg-secondary border-t border-border">

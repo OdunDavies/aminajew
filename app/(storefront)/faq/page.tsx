@@ -8,8 +8,8 @@ export const metadata: Metadata = {
     "Find answers to common questions about artsybrands in Kuje, Abuja, FCT — shipping, returns, gold jewelry care, gold by the ounce, gift wrapping, and payment methods.",
 };
 
-export default function FAQPage() {
-  const { faq } = readSiteContent();
+export default async function FAQPage() {
+  const { faq } = await readSiteContent();
 
   const faqSchema = {
     "@context": "https://schema.org",

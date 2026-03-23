@@ -4,7 +4,7 @@ import { readProducts } from "@/lib/products-store";
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://artsybrands.com";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const products = readProducts();
+  const products = await readProducts();
 
   const productUrls: MetadataRoute.Sitemap = products.map((p) => ({
     url: `${BASE_URL}/product/${p.id}`,

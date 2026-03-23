@@ -35,7 +35,7 @@ export async function PUT(request: Request, { params }: Params) {
     return NextResponse.json({ error: parsed.error.errors[0].message }, { status: 400 });
   }
 
-  const products = readProducts();
+  const products = await readProducts();
   const index = products.findIndex((p) => p.id === id);
 
   if (index === -1) {
@@ -48,7 +48,7 @@ export async function PUT(request: Request, { params }: Params) {
     updated_at: new Date().toISOString(),
   };
 
-  writeProducts(products);
+  await writeProducts(products);
   invalidateProductsCache();
   return NextResponse.json(products[index]);
 }
@@ -60,7 +60,7 @@ export async function DELETE(_request: Request, { params }: Params) {
   }
 
   const { id } = await params;
-  const products = readProducts();
+  const products = await readProducts();
   const product = products.find((p) => p.id === id);
 
   if (!product) {
@@ -80,7 +80,7 @@ export async function DELETE(_request: Request, { params }: Params) {
     }
   }
 
-  writeProducts(products.filter((p) => p.id !== id));
+  await writeProducts(products.filter((p) => p.id !== id));
   invalidateProductsCache();
   return NextResponse.json({ ok: true });
 }

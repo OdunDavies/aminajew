@@ -9,8 +9,8 @@ export const metadata: Metadata = {
     "Learn about artsybrands in Kuje, Abuja, FCT — our story, craftsmanship philosophy, and commitment to ethically sourced, handcrafted gold jewelry sold by the ounce.",
 };
 
-export default function AboutPage() {
-  const { about } = readSiteContent();
+export default async function AboutPage() {
+  const { about } = await readSiteContent();
 
   return (
     <div className="min-h-screen pt-24 pb-16">

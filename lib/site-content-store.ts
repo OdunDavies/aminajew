@@ -1,8 +1,11 @@
 import "server-only";
 import fs from "fs";
 import path from "path";
+import { getStore } from "@netlify/blobs";
 
 const CONTENT_FILE = path.join(process.cwd(), "data", "site-content.json");
+const BLOB_STORE = "cms";
+const BLOB_KEY = "site-content";
 
 export interface BrandHours {
   weekdays: string;
@@ -146,7 +149,17 @@ const defaultContent: SiteContent = {
   },
 };
 
-export function readSiteContent(): SiteContent {
+export async function readSiteContent(): Promise<SiteContent> {
+  // Try Netlify Blobs first (production)
+  try {
+    const store = getStore({ name: BLOB_STORE, consistency: "strong" });
+    const content = await store.get(BLOB_KEY, { type: "json" });
+    if (content) return content as SiteContent;
+  } catch {
+    // Not on Netlify — fall through to file system
+  }
+
+  // Fall back to committed JSON file (local dev or first deploy seed)
   try {
     const raw = fs.readFileSync(CONTENT_FILE, "utf-8");
     return JSON.parse(raw) as SiteContent;
@@ -155,6 +168,16 @@ export function readSiteContent(): SiteContent {
   }
 }
 
-export function writeSiteContent(content: SiteContent): void {
+export async function writeSiteContent(content: SiteContent): Promise<void> {
+  // Try Netlify Blobs first (production)
+  try {
+    const store = getStore({ name: BLOB_STORE, consistency: "strong" });
+    await store.setJSON(BLOB_KEY, content);
+    return;
+  } catch {
+    // Not on Netlify — fall through to file system
+  }
+
+  // Fall back to file system (local dev)
   fs.writeFileSync(CONTENT_FILE, JSON.stringify(content, null, 2));
 }

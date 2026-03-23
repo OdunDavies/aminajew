@@ -8,7 +8,7 @@ export default async function HomePage() {
   const [newArrivals, bestSellers, siteContent] = await Promise.all([
     fetchNewArrivals(),
     fetchBestSellers(),
-    Promise.resolve(readSiteContent()),
+    readSiteContent(),
   ]);
 
   const websiteSchema = {

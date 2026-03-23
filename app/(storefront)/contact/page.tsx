@@ -9,8 +9,8 @@ export const metadata: Metadata = {
     "Get in touch with artsybrands in Kuje, Abuja, FCT. Reach out for inquiries about our handcrafted gold jewelry, custom orders, gold by the ounce, or customer support.",
 };
 
-export default function ContactPage() {
-  const { brand } = readSiteContent();
+export default async function ContactPage() {
+  const { brand } = await readSiteContent();
 
   const contactDetails = [
     { icon: MapPin, title: "Address", text: brand.address },

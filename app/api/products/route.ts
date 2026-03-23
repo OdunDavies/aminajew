@@ -18,7 +18,7 @@ const productSchema = z.object({
 });
 
 export async function GET() {
-  const products = readProducts();
+  const products = await readProducts();
   return NextResponse.json(products);
 }
 
@@ -51,9 +51,9 @@ export async function POST(request: Request) {
     updated_at: now,
   };
 
-  const products = readProducts();
+  const products = await readProducts();
   products.push(product);
-  writeProducts(products);
+  await writeProducts(products);
   invalidateProductsCache();
 
   return NextResponse.json(product, { status: 201 });

@@ -4,7 +4,7 @@ import { readSiteContent, writeSiteContent, type SiteContent } from "@/lib/site-
 import { verifyAdmin } from "@/lib/verify-admin";
 
 export async function GET() {
-  const content = readSiteContent();
+  const content = await readSiteContent();
   return NextResponse.json(content);
 }
 
@@ -104,7 +104,7 @@ export async function PUT(req: Request) {
     return NextResponse.json({ error: parsed.error.flatten() }, { status: 422 });
   }
 
-  const current = readSiteContent();
+  const current = await readSiteContent();
   const b = parsed.data.brand;
   const h = parsed.data.homepage;
   const a = parsed.data.about;
@@ -142,6 +142,6 @@ export async function PUT(req: Request) {
       : current.seo,
   };
 
-  writeSiteContent(updated);
+  await writeSiteContent(updated);
   return NextResponse.json({ ok: true });
 }

@@ -20,7 +20,7 @@ const raleway = Raleway({
 });
 
 export async function generateMetadata(): Promise<Metadata> {
-  const { seo, brand } = readSiteContent();
+  const { seo, brand } = await readSiteContent();
 
   return {
     metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://artsybrands.com"),

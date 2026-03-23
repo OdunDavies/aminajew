@@ -8,8 +8,8 @@ export const metadata: Metadata = {
     "Browse artsybrands gold jewelry collections in Kuje, Abuja, FCT — rings, necklaces, bracelets, and earrings sold by the ounce.",
 };
 
-export default function CollectionsPage() {
-  const { homepage } = readSiteContent();
+export default async function CollectionsPage() {
+  const { homepage } = await readSiteContent();
 
   return (
     <div className="min-h-screen pt-24 pb-16 px-6">

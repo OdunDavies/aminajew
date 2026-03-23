@@ -14,12 +14,12 @@ export interface Product {
   sizes?: string[];
 }
 
-// Module-level cache — avoids reading products.json multiple times per request cycle.
+// Module-level cache — avoids reading on every filter call within one request cycle.
 // Cleared by invalidateProductsCache() after any write operation.
 let _cache: StoredProduct[] | null = null;
 
-function getProducts(): StoredProduct[] {
-  if (!_cache) _cache = readProducts();
+async function getProducts(): Promise<StoredProduct[]> {
+  if (!_cache) _cache = await readProducts();
   return _cache;
 }
 
@@ -44,32 +44,32 @@ function mapRow(row: StoredProduct): Product {
 }
 
 export async function fetchProducts(): Promise<Product[]> {
-  return getProducts()
+  return (await getProducts())
     .sort((a, b) => a.created_at.localeCompare(b.created_at))
     .map(mapRow);
 }
 
 export async function fetchProductsByCollection(collection: string): Promise<Product[]> {
-  return getProducts()
+  return (await getProducts())
     .filter((p) => p.collection === collection)
     .sort((a, b) => a.created_at.localeCompare(b.created_at))
     .map(mapRow);
 }
 
 export async function fetchProductById(id: string): Promise<Product | null> {
-  const product = getProducts().find((p) => p.id === id);
+  const product = (await getProducts()).find((p) => p.id === id);
   return product ? mapRow(product) : null;
 }
 
 export async function fetchNewArrivals(): Promise<Product[]> {
-  return getProducts()
+  return (await getProducts())
     .filter((p) => p.is_new)
     .sort((a, b) => a.created_at.localeCompare(b.created_at))
     .map(mapRow);
 }
 
 export async function fetchBestSellers(): Promise<Product[]> {
-  return getProducts()
+  return (await getProducts())
     .filter((p) => p.is_best_seller)
     .sort((a, b) => a.created_at.localeCompare(b.created_at))
     .map(mapRow);
