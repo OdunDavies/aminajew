@@ -1,0 +1,19 @@
+[
+  {
+    "id": "1d5e1c93-62b3-4849-a147-43c63648a53e",
+    "name": "ring",
+    "price": 65000,
+    "collection": "rings",
+    "material": "gold",
+    "description": "lovely gold product",
+    "image": "/uploads/99086b43-9174-43fb-b4aa-ad54b11d43fa.jpg",
+    "images": [
+      "/uploads/d6a53acb-c2ea-414c-a6b9-78915914f56f.jpg"
+    ],
+    "is_new": true,
+    "is_best_seller": false,
+    "sizes": [],
+    "created_at": "2026-03-23T03:11:25.185Z",
+    "updated_at": "2026-03-23T03:11:44.781Z"
+  }
+]

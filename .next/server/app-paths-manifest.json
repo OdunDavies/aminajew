@@ -1,0 +1,8 @@
+{
+  "/api/payment/initialize/route": "app/api/payment/initialize/route.js",
+  "/(storefront)/page": "app/(storefront)/page.js",
+  "/(storefront)/product/[id]/page": "app/(storefront)/product/[id]/page.js",
+  "/(storefront)/checkout/page": "app/(storefront)/checkout/page.js",
+  "/admin/content/page": "app/admin/content/page.js",
+  "/(storefront)/collections/page": "app/(storefront)/collections/page.js"
+}
