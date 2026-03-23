@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { resend, FROM_EMAIL, ADMIN_EMAIL } from "@/lib/resend";
+import { getResend, FROM_EMAIL, ADMIN_EMAIL } from "@/lib/resend";
 
 interface OrderItem {
   name: string;
@@ -31,7 +31,7 @@ export async function POST(request: Request) {
       .map((i) => `  - ${i.name} × ${i.quantity} = ₦${(i.price * i.quantity).toLocaleString()}`)
       .join("\n");
 
-    await resend.emails.send({
+    await getResend().emails.send({
       from: FROM_EMAIL,
       to: ADMIN_EMAIL,
       subject: `New Order — ${customerName}`,

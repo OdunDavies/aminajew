@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { validateContactForm } from "@/lib/validation";
-import { resend, FROM_EMAIL, ADMIN_EMAIL } from "@/lib/resend";
+import { getResend, FROM_EMAIL, ADMIN_EMAIL } from "@/lib/resend";
 
 export async function POST(request: Request) {
   const body = await request.json();
@@ -15,7 +15,7 @@ export async function POST(request: Request) {
     ? `New Contact: ${result.data.subject}`
     : "New Contact Message";
 
-  await resend.emails.send({
+  await getResend().emails.send({
     from: FROM_EMAIL,
     to: ADMIN_EMAIL,
     subject,
