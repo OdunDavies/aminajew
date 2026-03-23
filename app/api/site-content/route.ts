@@ -131,12 +131,37 @@ export async function PUT(req: Request) {
         }
       : current.brand,
     homepage: h
-      ? { hero: h.hero, collections: h.collections, story: h.story }
+      ? {
+          hero: {
+            tagline: h.hero.tagline,
+            heading: h.hero.heading,
+            description: h.hero.description,
+            backgroundImage: h.hero.backgroundImage,
+          },
+          collections: h.collections.map((c) => ({
+            slug: c.slug,
+            label: c.label,
+            image: c.image,
+          })),
+          story: {
+            tagline: h.story.tagline,
+            heading: h.story.heading,
+            paragraph1: h.story.paragraph1,
+            paragraph2: h.story.paragraph2,
+            image: h.story.image,
+          },
+        }
       : current.homepage,
     about: a
-      ? { heroImage: a.heroImage, paragraphs: a.paragraphs, stats: a.stats }
+      ? {
+          heroImage: a.heroImage,
+          paragraphs: a.paragraphs,
+          stats: a.stats.map((st) => ({ num: st.num, label: st.label })),
+        }
       : current.about,
-    faq: parsed.data.faq ?? current.faq,
+    faq: parsed.data.faq
+      ? parsed.data.faq.map((f) => ({ question: f.question, answer: f.answer }))
+      : current.faq,
     seo: s
       ? { title: s.title, description: s.description, keywords: s.keywords, ogImage: s.ogImage }
       : current.seo,
