@@ -46,6 +46,11 @@ export async function POST(request: Request) {
 
   const { password } = await request.json();
   const adminPassword = process.env.ADMIN_PASSWORD ?? "";
+  const jwtSecret = process.env.ADMIN_JWT_SECRET ?? "";
+
+  if (!adminPassword || !jwtSecret) {
+    return NextResponse.json({ error: "Admin credentials not configured on server" }, { status: 503 });
+  }
 
   // Constant-time comparison to prevent timing attacks
   let match = false;
@@ -64,7 +69,7 @@ export async function POST(request: Request) {
   // Clear failed attempts on successful login
   clearRateLimit(ip);
 
-  const secret = new TextEncoder().encode(process.env.ADMIN_JWT_SECRET!);
+  const secret = new TextEncoder().encode(jwtSecret);
   const token = await new SignJWT({ role: "admin" })
     .setProtectedHeader({ alg: "HS256" })
     .setIssuedAt()

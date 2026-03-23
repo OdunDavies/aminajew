@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Instagram, Facebook } from "lucide-react";
 import { readSiteContent } from "@/lib/site-content-store";
 
 const Footer = async () => {
@@ -13,6 +14,20 @@ const Footer = async () => {
             <p className="text-sm text-muted-foreground leading-relaxed">
               {brand.tagline}
             </p>
+            <div className="flex gap-3 mt-4">
+              {brand.social.instagram && (
+                <a href={brand.social.instagram} target="_blank" rel="noopener noreferrer"
+                   className="text-muted-foreground hover:text-primary transition-colors">
+                  <Instagram size={18} />
+                </a>
+              )}
+              {brand.social.facebook && (
+                <a href={brand.social.facebook} target="_blank" rel="noopener noreferrer"
+                   className="text-muted-foreground hover:text-primary transition-colors">
+                  <Facebook size={18} />
+                </a>
+              )}
+            </div>
           </div>
           <div>
             <h4 className="text-xs tracking-[0.2em] uppercase text-foreground mb-4">Collections</h4>
@@ -39,14 +54,9 @@ const Footer = async () => {
             </div>
           </div>
         </div>
-        <div className="border-t border-border mt-12 pt-8 text-center space-y-2">
+        <div className="border-t border-border mt-12 pt-8 text-center">
           <p className="text-xs text-muted-foreground tracking-wider">
             © {new Date().getFullYear()} {brand.name}. All rights reserved. Crafted with love.
-          </p>
-          <p className="text-[10px] text-muted-foreground/60">
-            <a href="https://www.flaticon.com/free-icons/jewelry" title="jewelry icons" className="hover:text-muted-foreground transition-colors">
-              Jewelry icons created by Karyative – Flaticon
-            </a>
           </p>
         </div>
       </div>

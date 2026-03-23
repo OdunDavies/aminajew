@@ -19,11 +19,45 @@ export default async function HomePage() {
     description: siteContent.seo.description,
   };
 
+  const localBusinessSchema = {
+    "@context": "https://schema.org",
+    "@type": "JewelryStore",
+    name: siteContent.brand.name,
+    description: siteContent.seo.description,
+    url: siteUrl,
+    telephone: siteContent.brand.phone,
+    ...(siteContent.brand.email ? { email: siteContent.brand.email } : {}),
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: siteContent.brand.address,
+      addressLocality: "Abuja",
+      addressRegion: "FCT",
+      addressCountry: "NG",
+    },
+    openingHoursSpecification: [
+      siteContent.brand.hours.weekdays,
+      siteContent.brand.hours.saturday,
+      siteContent.brand.hours.sunday,
+    ]
+      .filter(Boolean)
+      .map((h) => ({ "@type": "OpeningHoursSpecification", description: h })),
+    sameAs: [
+      siteContent.brand.social.instagram,
+      siteContent.brand.social.facebook,
+      siteContent.brand.social.twitter,
+    ].filter(Boolean),
+    ...(siteContent.seo.ogImage ? { image: siteContent.seo.ogImage } : {}),
+  };
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
       />
       <HomePageClient
         newArrivals={newArrivals}

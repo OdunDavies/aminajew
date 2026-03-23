@@ -38,15 +38,21 @@ export default async function ProductPage({ params }: Props) {
   const allInCollection = await fetchProductsByCollection(product.collection);
   const related = allInCollection.filter((p) => p.id !== product.id).slice(0, 4);
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://artsybrands.com";
+  const allImages = [product.image, ...(product.images ?? [])].filter(Boolean);
+
   const productSchema = {
     "@context": "https://schema.org",
     "@type": "Product",
     name: product.name,
     description: product.description,
-    image: product.image,
+    image: allImages,
+    sku: product.id,
+    url: `${siteUrl}/product/${product.id}`,
     brand: { "@type": "Brand", name: "artsybrands" },
     offers: {
       "@type": "Offer",
+      url: `${siteUrl}/product/${product.id}`,
       price: product.price,
       priceCurrency: "NGN",
       availability: "https://schema.org/InStock",
