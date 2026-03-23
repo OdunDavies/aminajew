@@ -37,7 +37,9 @@ export async function POST(request: Request) {
   const now = new Date().toISOString();
   const product: StoredProduct = {
     id: crypto.randomUUID(),
-    ...parsed.data,
+    name: parsed.data.name,
+    price: parsed.data.price,
+    collection: parsed.data.collection,
     material: parsed.data.material ?? "",
     description: parsed.data.description ?? "",
     image: parsed.data.image ?? "",
