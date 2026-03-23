@@ -162,7 +162,7 @@ export default function AdminProductsPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-wrap items-center justify-between gap-2">
         <h1 className="font-serif text-2xl text-foreground">Products</h1>
         <Dialog open={open} onOpenChange={(v) => { setOpen(v); if (!v) { setEditId(null); setForm(emptyForm); } }}>
           <DialogTrigger asChild>
@@ -173,7 +173,7 @@ export default function AdminProductsPage() {
               <DialogTitle>{editId ? "Edit Product" : "Add Product"}</DialogTitle>
             </DialogHeader>
             <form onSubmit={(e) => { e.preventDefault(); saveMutation.mutate(); }} className="space-y-4">
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label>Name</Label>
                   <Input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} required />
@@ -186,7 +186,7 @@ export default function AdminProductsPage() {
                   </div>
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label>Collection</Label>
                   <Select value={form.collection} onValueChange={(v) => setForm({ ...form, collection: v as ProductCollection })}>
@@ -276,7 +276,7 @@ export default function AdminProductsPage() {
           <Button variant="outline" size="sm" onClick={() => refetch()}>Retry</Button>
         </div>
       ) : (
-        <div className="border border-border rounded-md">
+        <div className="border border-border rounded-md overflow-x-auto">
           <Table>
             <TableHeader>
               <TableRow>

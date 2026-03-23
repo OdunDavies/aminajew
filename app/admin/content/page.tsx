@@ -158,17 +158,19 @@ export default function AdminContentPage() {
       <h1 className="font-serif text-2xl text-foreground">Site Content</h1>
 
       <Tabs defaultValue="brand">
-        <TabsList className="mb-6">
+        <div className="overflow-x-auto pb-1">
+        <TabsList className="mb-6 w-max">
           <TabsTrigger value="brand">Brand</TabsTrigger>
           <TabsTrigger value="homepage">Homepage</TabsTrigger>
           <TabsTrigger value="about">About</TabsTrigger>
           <TabsTrigger value="faq">FAQ</TabsTrigger>
           <TabsTrigger value="seo">SEO</TabsTrigger>
         </TabsList>
+        </div>
 
         {/* ─── BRAND ─── */}
         <TabsContent value="brand" className="space-y-4 max-w-2xl">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label>Brand Name</Label>
               <Input value={brand.name} onChange={(e) => setBrand({ ...brand, name: e.target.value })} />

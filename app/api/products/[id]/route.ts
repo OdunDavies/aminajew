@@ -3,6 +3,7 @@ import { z } from "zod";
 import { readProducts, writeProducts } from "@/lib/products-store";
 import { verifyAdmin } from "@/lib/verify-admin";
 import { invalidateProductsCache } from "@/data/products";
+import { getStore } from "@netlify/blobs";
 import fs from "fs";
 import path from "path";
 
@@ -67,16 +68,18 @@ export async function DELETE(_request: Request, { params }: Params) {
     return NextResponse.json({ error: "Not found" }, { status: 404 });
   }
 
-  // Clean up uploaded image files
-  const uploadsDir = path.join(process.cwd(), "public");
-  const filesToDelete = [product.image, ...product.images].filter(
-    (url) => url && url.startsWith("/uploads/")
-  );
+  // Clean up uploaded image files from Blobs or local fs
+  const filesToDelete = [product.image, ...product.images].filter(Boolean);
   for (const url of filesToDelete) {
-    try {
-      fs.unlinkSync(path.join(uploadsDir, url));
-    } catch {
-      // File may already be gone — ignore
+    if (url.startsWith("/api/uploads/")) {
+      try {
+        const store = getStore({ name: "uploads", consistency: "strong" });
+        await store.delete(url.replace("/api/uploads/", ""));
+      } catch { /* ignore */ }
+    } else if (url.startsWith("/uploads/")) {
+      try {
+        fs.unlinkSync(path.join(process.cwd(), "public", url));
+      } catch { /* ignore */ }
     }
   }
 
